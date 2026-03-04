@@ -9,51 +9,51 @@ export default function Home() {
   const licensingText = content.licensing.join(" ");
 
   return (
-    <div className="min-h-screen bg-bg text-text-main">
+    <div className="watercolor-shell min-h-screen text-text-main">
       <SiteHeader brand={content.name} />
 
-      <main className="mx-auto w-full max-w-6xl space-y-14 px-5 py-10 sm:px-8">
+      <main className="relative z-10 mx-auto w-full max-w-6xl space-y-16 px-5 pb-12 pt-8 sm:px-8 sm:pt-10">
         <section
           id="hero"
-          className="scroll-mt-28 rounded-2xl border border-black/5 bg-surface p-6 shadow-sm sm:p-8 lg:p-10"
+          className="paper-panel scroll-mt-32 rounded-2xl p-6 sm:p-9 lg:p-12"
         >
-          <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_1fr]">
-            <div className="space-y-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
+          <div className="grid items-center gap-9 lg:grid-cols-[1.06fr_1fr] lg:gap-12">
+            <div className="space-y-6">
+              <p className="eyebrow">
                 {content.tagline}
               </p>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl">
+              <h1 className="hero-title">
                 {content.hero.headline}
               </h1>
-              <p className="max-w-xl text-base leading-relaxed text-text-muted sm:text-lg">
+              <p className="hero-copy">
                 {content.hero.subheadline}
               </p>
 
-              <div className="flex flex-wrap gap-3 pt-1">
+              <div className="flex flex-wrap gap-3 pt-2">
                 <a
                   href="#gallery"
-                  className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-1 hover:shadow-sm"
+                  className="btn-primary-watercolor inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold"
                 >
                   {content.hero.primaryCta}
                   <ArrowRight size={16} />
                 </a>
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-2 rounded-xl border border-black/10 bg-white px-5 py-3 text-sm font-semibold transition hover:-translate-y-1 hover:border-primary hover:text-primary hover:shadow-sm"
+                  className="btn-secondary-watercolor inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold"
                 >
                   {content.hero.secondaryCta}
                 </a>
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-2xl shadow-md">
+            <div className="hero-image-shell relative overflow-hidden rounded-2xl">
               <Image
                 src={content.hero.image}
                 alt="Watercolor-inspired gallery hero artwork"
                 width={1600}
                 height={1200}
                 priority
-                className="h-full min-h-[320px] w-full object-cover"
+                className="h-full min-h-[340px] w-full object-cover object-center"
               />
             </div>
           </div>
@@ -61,39 +61,39 @@ export default function Home() {
 
         <section
           id="about"
-          className="scroll-mt-28 rounded-2xl border border-black/5 bg-white p-6 shadow-sm sm:p-8"
+          className="paper-panel scroll-mt-32 rounded-2xl p-6 sm:p-9"
         >
-          <div className="grid gap-8 lg:grid-cols-[1fr_1fr]">
+          <div className="grid gap-9 lg:grid-cols-[1fr_1fr] lg:gap-10">
             <div className="space-y-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
+              <p className="eyebrow">
                 About / Licensing
               </p>
-              <h2 className="text-3xl">Business-ready art direction</h2>
+              <h2 className="section-title">Business-ready art direction</h2>
               {content.about.map((paragraph, index) => (
-                <p key={`about-${index}`} className="text-text-muted">
+                <p key={`about-${index}`} className="text-base leading-relaxed text-text-muted">
                   {paragraph}
                 </p>
               ))}
               {content.licensing.map((paragraph, index) => (
-                <p key={`licensing-${index}`} className="text-text-muted">
+                <p key={`licensing-${index}`} className="text-base leading-relaxed text-text-muted">
                   {paragraph}
                 </p>
               ))}
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <article className="rounded-xl border border-black/5 bg-surface p-5 shadow-sm">
+              <article className="feature-tile rounded-2xl p-6">
                 <Palette className="text-primary" size={22} />
-                <h3 className="mt-3 text-xl">Fine Art Aesthetic</h3>
-                <p className="mt-2 text-sm text-text-muted">
+                <h3 className="mt-4 text-2xl">Fine Art Aesthetic</h3>
+                <p className="mt-3 text-sm leading-relaxed text-text-muted">
                   Elegant visual language with watercolor influence and clean modern structure.
                 </p>
               </article>
 
-              <article className="rounded-xl border border-black/5 bg-surface p-5 shadow-sm">
+              <article className="feature-tile rounded-2xl p-6">
                 <ShieldCheck className="text-primary" size={22} />
-                <h3 className="mt-3 text-xl">Clear Licensing</h3>
-                <p className="mt-2 text-sm text-text-muted">
+                <h3 className="mt-4 text-2xl">Clear Licensing</h3>
+                <p className="mt-3 text-sm leading-relaxed text-text-muted">
                   Usage-ready terms to simplify approvals across marketing, product, and print teams.
                 </p>
               </article>
@@ -110,18 +110,18 @@ export default function Home() {
 
         <section
           id="contact"
-          className="scroll-mt-28 rounded-2xl border border-black/5 bg-surface p-6 shadow-sm sm:p-8"
+          className="paper-panel scroll-mt-32 rounded-2xl p-6 sm:p-9"
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
+          <p className="eyebrow">
             Contact
           </p>
-          <h2 className="mt-2 text-3xl">Start your curated selection</h2>
-          <p className="mt-3 max-w-2xl text-text-muted">
+          <h2 className="section-title mt-3">Start your curated selection</h2>
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-text-muted">
             Share your campaign goals and we will prepare a licensing-ready visual set tailored to your team.
           </p>
           <a
             href={`mailto:${content.contactEmail}`}
-            className="mt-5 inline-flex items-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-3 text-sm font-medium transition hover:-translate-y-1 hover:border-primary hover:text-primary hover:shadow-sm"
+            className="btn-secondary-watercolor mt-6 inline-flex items-center gap-2 px-4 py-3 text-sm font-semibold"
           >
             <Mail size={16} />
             {content.contactEmail}
@@ -129,10 +129,10 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-black/5 py-6">
+      <footer className="footer-shell mt-8 py-7">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 text-sm text-text-muted sm:px-8">
           <p>{content.name}</p>
-          <a href={`mailto:${content.contactEmail}`} className="transition hover:text-primary">
+          <a href={`mailto:${content.contactEmail}`} className="site-nav-link">
             {content.contactEmail}
           </a>
         </div>

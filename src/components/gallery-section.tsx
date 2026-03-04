@@ -29,7 +29,7 @@ const initialFilters: FilterState = {
 };
 
 const inputClassName =
-  "w-full rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none transition focus:border-primary";
+  "filter-input w-full rounded-xl px-3 py-2 text-sm outline-none";
 
 const toUniqueSorted = (values: string[]): string[] =>
   [...new Set(values)].sort((a, b) => a.localeCompare(b));
@@ -116,32 +116,34 @@ export function GallerySection({
   };
 
   return (
-    <section id="gallery" className="scroll-mt-28">
-      <div className="rounded-2xl bg-surface p-6 shadow-sm sm:p-8">
+    <section id="gallery" className="scroll-mt-32">
+      <div className="paper-panel rounded-2xl p-6 sm:p-9">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
+            <p className="eyebrow">
               Gallery
             </p>
-            <h2 className="text-3xl">Curated Collection</h2>
-            <p className="max-w-2xl text-sm text-text-muted sm:text-base">{intro}</p>
+            <h2 className="section-title">Curated Collection</h2>
+            <p className="max-w-2xl text-sm leading-relaxed text-text-muted sm:text-base">
+              {intro}
+            </p>
           </div>
           <button
             type="button"
             onClick={() => setShowFilters((prev) => !prev)}
-            className="inline-flex w-fit items-center gap-2 rounded-xl border border-black/10 bg-white px-3 py-2 text-sm font-medium transition hover:-translate-y-1 hover:shadow-sm"
+            className="btn-secondary-watercolor inline-flex w-fit items-center gap-2 px-3 py-2 text-sm font-semibold"
           >
             <SlidersHorizontal size={16} />
             Custom Filter
           </button>
         </div>
 
-        <p className="mt-5 rounded-xl border border-primary/20 bg-primary/10 p-4 text-sm text-text-main">
+        <p className="license-banner mt-6 rounded-xl p-4 text-sm text-text-main">
           <span className="font-semibold">Licensing:</span> {licensingText}
         </p>
 
         {showFilters ? (
-          <div className="mt-5 grid gap-3 rounded-xl border border-black/10 bg-white p-4 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="filter-surface mt-6 grid gap-3 rounded-xl p-4 sm:grid-cols-2 lg:grid-cols-5">
             <select
               value={filters.author}
               onChange={(event) =>
@@ -216,7 +218,7 @@ export function GallerySection({
               <button
                 type="button"
                 onClick={() => setFilters(initialFilters)}
-                className="rounded-xl border border-black/10 px-3 py-2 text-sm transition hover:border-primary hover:text-primary"
+                className="btn-secondary-watercolor rounded-xl px-3 py-2 text-sm font-semibold"
               >
                 Reset Filters
               </button>
@@ -231,34 +233,34 @@ export function GallerySection({
             return (
               <article
                 key={artwork.id}
-                className="overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                className="artwork-card overflow-hidden rounded-2xl"
               >
                 <img
                   src={artwork.image}
                   alt={artwork.title}
-                  className="h-52 w-full object-cover"
+                  className="artwork-image h-52 w-full object-cover"
                   loading="lazy"
                 />
 
                 <div className="space-y-3 p-4">
                   <div>
-                    <h3 className="text-xl">{artwork.title}</h3>
-                    <p className="text-sm text-text-muted">
+                    <h3 className="text-2xl">{artwork.title}</h3>
+                    <p className="text-sm tracking-wide text-text-muted">
                       {artwork.author} • {artwork.year}
                     </p>
                   </div>
 
-                  <p className="text-sm text-text-muted">
+                  <p className="text-sm tracking-wide text-text-muted">
                     {artwork.color} • {artwork.dimensions}
                   </p>
 
                   <button
                     type="button"
                     onClick={() => toggleArtworkSelection(artwork.id)}
-                    className={`inline-flex w-full items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition ${
+                    className={`inline-flex w-full items-center justify-center gap-2 px-3 py-2 text-sm font-semibold ${
                       isSelected
-                        ? "border border-primary bg-primary text-white"
-                        : "border border-black/10 bg-white hover:border-primary hover:text-primary"
+                        ? "btn-primary-watercolor"
+                        : "btn-secondary-watercolor hover:text-primary"
                     }`}
                   >
                     {isSelected ? <Check size={16} /> : <Plus size={16} />}
@@ -271,21 +273,21 @@ export function GallerySection({
         </div>
 
         {filteredArtworks.length === 0 ? (
-          <p className="mt-6 text-sm text-text-muted">
+          <p className="mt-6 text-sm tracking-wide text-text-muted">
             No artworks match the current filters.
           </p>
         ) : null}
 
-        <div className="sticky bottom-4 z-20 mt-8 rounded-2xl bg-text-main p-4 text-white shadow-md">
+        <div className="gallery-sticky-bar sticky bottom-4 z-20 mt-8 rounded-2xl p-4 text-white">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-white/85">
+            <p className="text-sm tracking-wide text-white/85">
               Selected artworks: <span className="font-semibold">{selectedArtworks.length}</span>
             </p>
             <button
               type="button"
               disabled={selectedArtworks.length === 0 || isExporting}
               onClick={exportSelectedAsPdf}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:-translate-y-1 hover:shadow-sm disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:translate-y-0"
+              className="btn-primary-watercolor inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:translate-y-0"
             >
               <FileDown size={16} />
               {isExporting ? "Preparing PDF..." : "Export Selected PDF"}
