@@ -104,6 +104,7 @@ export default function Home() {
         <GallerySection
           intro={content.galleryIntro}
           licensingText={licensingText}
+          brandName={content.name}
           artworks={content.artworks}
         />
 

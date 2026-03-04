@@ -3,10 +3,12 @@
 import { Check, FileDown, Plus, SlidersHorizontal } from "lucide-react";
 import { useMemo, useState } from "react";
 import type { Artwork } from "@/lib/content";
+import { exportGalleryPdf } from "@/lib/pdf-export";
 
 type GallerySectionProps = {
   intro: string;
   licensingText: string;
+  brandName: string;
   artworks: Artwork[];
 };
 
@@ -29,25 +31,19 @@ const initialFilters: FilterState = {
 const inputClassName =
   "w-full rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none transition focus:border-primary";
 
-const escapeHtml = (value: string): string =>
-  value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-
 const toUniqueSorted = (values: string[]): string[] =>
   [...new Set(values)].sort((a, b) => a.localeCompare(b));
 
 export function GallerySection({
   intro,
   licensingText,
+  brandName,
   artworks
 }: GallerySectionProps) {
   const [filters, setFilters] = useState<FilterState>(initialFilters);
   const [showFilters, setShowFilters] = useState(false);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [isExporting, setIsExporting] = useState(false);
 
   const options = useMemo(
     () => ({
@@ -99,128 +95,24 @@ export function GallerySection({
     });
   };
 
-  const exportSelectedAsPdf = (): void => {
-    if (selectedArtworks.length === 0) {
+  const exportSelectedAsPdf = async (): Promise<void> => {
+    if (selectedArtworks.length === 0 || isExporting) {
       return;
     }
 
-    const printWindow = window.open(
-      "",
-      "_blank",
-      "noopener,noreferrer,width=1200,height=900"
-    );
-
-    if (!printWindow) {
-      return;
+    setIsExporting(true);
+    try {
+      await exportGalleryPdf({
+        artworks: selectedArtworks,
+        licensingText,
+        brandName
+      });
+    } catch (error) {
+      console.error("Failed to export gallery PDF", error);
+      window.alert("Unable to export PDF right now. Please try again.");
+    } finally {
+      setIsExporting(false);
     }
-
-    const cards = selectedArtworks
-      .map((artwork) => {
-        const imageUrl = artwork.image.startsWith("http")
-          ? artwork.image
-          : `${window.location.origin}${artwork.image}`;
-
-        return `
-          <article class="card">
-            <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(artwork.title)}" />
-            <div class="meta">
-              <h3>${escapeHtml(artwork.title)}</h3>
-              <p>${escapeHtml(artwork.author)} • ${artwork.year}</p>
-              <p>${escapeHtml(artwork.color)} • ${escapeHtml(artwork.dimensions)}</p>
-            </div>
-          </article>
-        `;
-      })
-      .join("");
-
-    printWindow.document.write(`
-      <!doctype html>
-      <html lang="en">
-        <head>
-          <meta charset="utf-8" />
-          <title>Galaxy Graphics Selection</title>
-          <style>
-            :root {
-              color-scheme: light;
-            }
-            * {
-              box-sizing: border-box;
-            }
-            body {
-              margin: 0;
-              font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-              color: #000;
-              background: #fff;
-              padding: 40px;
-            }
-            .brand {
-              margin-bottom: 18px;
-              border-bottom: 1px solid #e8e8e8;
-              padding-bottom: 18px;
-            }
-            .brand h1 {
-              margin: 0;
-              font-size: 28px;
-            }
-            .brand p {
-              margin: 8px 0 0;
-              color: #525252;
-              max-width: 900px;
-              line-height: 1.45;
-            }
-            .grid {
-              display: grid;
-              grid-template-columns: repeat(2, minmax(0, 1fr));
-              gap: 20px;
-              margin-top: 24px;
-            }
-            .card {
-              border: 1px solid #ececec;
-              border-radius: 14px;
-              overflow: hidden;
-              break-inside: avoid;
-            }
-            .card img {
-              display: block;
-              width: 100%;
-              height: 240px;
-              object-fit: cover;
-            }
-            .meta {
-              padding: 12px 14px 14px;
-            }
-            .meta h3 {
-              margin: 0 0 8px;
-              font-size: 18px;
-            }
-            .meta p {
-              margin: 0;
-              color: #525252;
-              font-size: 14px;
-              line-height: 1.5;
-            }
-            .meta p + p {
-              margin-top: 4px;
-            }
-            @page {
-              size: A4;
-              margin: 12mm;
-            }
-          </style>
-        </head>
-        <body>
-          <section class="brand">
-            <h1>Galaxy Graphics</h1>
-            <p>${escapeHtml(licensingText)}</p>
-          </section>
-          <section class="grid">${cards}</section>
-        </body>
-      </html>
-    `);
-
-    printWindow.document.close();
-    printWindow.focus();
-    window.setTimeout(() => printWindow.print(), 350);
   };
 
   return (
@@ -391,12 +283,12 @@ export function GallerySection({
             </p>
             <button
               type="button"
-              disabled={selectedArtworks.length === 0}
+              disabled={selectedArtworks.length === 0 || isExporting}
               onClick={exportSelectedAsPdf}
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:-translate-y-1 hover:shadow-sm disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:translate-y-0"
             >
               <FileDown size={16} />
-              Export Selected PDF
+              {isExporting ? "Preparing PDF..." : "Export Selected PDF"}
             </button>
           </div>
         </div>
