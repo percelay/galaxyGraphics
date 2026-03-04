@@ -5,7 +5,7 @@ Name: Galaxy Graphics
 Tagline: Art + Function
 
 ## Hero
-Headline: Curated Visual Worlds for Modern Brands
+Headline: Beautiful Art for Modern Brands
 Subheadline: We blend expressive fine-art style with production-ready visual systems for campaigns, spaces, and digital products.
 Image: /hero.jpeg
 PrimaryCTA: Gallery

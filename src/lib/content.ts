@@ -35,7 +35,7 @@ const FALLBACK_CONTENT: SiteContent = {
   name: "Galaxy Graphics",
   tagline: "Art + Function",
   hero: {
-    headline: "Curated Visual Worlds for Modern Brands",
+    headline: "Beautiful Art for Modern Brands",
     subheadline:
       "We blend expressive art direction with production-ready visual systems for digital and physical experiences.",
     image: "/hero.jpeg",
