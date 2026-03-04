@@ -366,7 +366,7 @@ const buildPdfBlob = (pages: RenderedPage[]): Blob => {
     )
   );
 
-  return new Blob(chunks, { type: "application/pdf" });
+  return new Blob(chunks as BlobPart[], { type: "application/pdf" });
 };
 
 export const exportGalleryPdf = async ({
