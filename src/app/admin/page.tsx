@@ -1,6 +1,7 @@
 import { UploadCloud } from "lucide-react";
 import { getCatalogItems } from "@/lib/catalog";
 import { CatalogManager } from "./catalog-manager";
+import { ImageUploadForm } from "./image-upload-form";
 import { CatalogUploadForm } from "./upload-form";
 
 export const dynamic = "force-dynamic";
@@ -33,6 +34,8 @@ export default async function AdminPage() {
         </div>
 
         <CatalogUploadForm />
+
+        <ImageUploadForm />
 
         <CatalogManager initialItems={catalogItems} />
 

@@ -70,6 +70,7 @@ export function CatalogSearchSection({ initialResult }: CatalogSearchSectionProp
   const [offset, setOffset] = useState(0);
   const [result, setResult] = useState<CatalogSearchResult>(initialResult);
   const [isLoading, setIsLoading] = useState(false);
+  const [previewItem, setPreviewItem] = useState<CatalogItem | null>(null);
 
   const totalPages = Math.max(1, Math.ceil(result.total / pageSize));
   const currentPage = Math.floor(offset / pageSize) + 1;
@@ -202,12 +203,22 @@ export function CatalogSearchSection({ initialResult }: CatalogSearchSectionProp
               key={item.sku}
               className="artwork-card overflow-hidden rounded-2xl"
             >
-              <img
-                src={fallbackImages[index % fallbackImages.length]}
-                alt=""
-                className="artwork-image h-44 w-full object-cover"
-                loading="lazy"
-              />
+              <button
+                type="button"
+                onClick={() => setPreviewItem(item)}
+                className="block w-full text-left"
+              >
+                <img
+                  src={
+                    item.thumbnailImage ||
+                    item.largeImage ||
+                    fallbackImages[index % fallbackImages.length]
+                  }
+                  alt={item.itemName || item.sku}
+                  className="artwork-image h-44 w-full object-contain bg-surface"
+                  loading="lazy"
+                />
+              </button>
               <div className="space-y-3 p-4">
                 <div>
                   <h3 className="text-2xl">{item.itemName || "Untitled"}</h3>
@@ -222,6 +233,43 @@ export function CatalogSearchSection({ initialResult }: CatalogSearchSectionProp
             </article>
           ))}
         </div>
+
+        {previewItem ? (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+            role="dialog"
+            aria-modal="true"
+            onClick={() => setPreviewItem(null)}
+          >
+            <div
+              className="max-h-[90vh] w-full max-w-4xl overflow-auto rounded-2xl bg-surface p-4 shadow-2xl"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <img
+                src={
+                  previewItem.largeImage ||
+                  previewItem.thumbnailImage ||
+                  fallbackImages[0]
+                }
+                alt={previewItem.itemName || previewItem.sku}
+                className="max-h-[72vh] w-full object-contain"
+              />
+              <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <h3 className="text-2xl">{previewItem.itemName || "Untitled"}</h3>
+                  <p className="text-sm text-text-muted">{itemDetail(previewItem)}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setPreviewItem(null)}
+                  className="btn-secondary-watercolor px-4 py-2 text-sm font-semibold"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : null}
 
         {result.items.length === 0 ? (
           <p className="mt-6 text-sm tracking-wide text-text-muted">

@@ -22,6 +22,8 @@ const emptyForm: FormState = {
   publishedStockSize: "",
   stockSizeCode: "",
   fileName: "",
+  thumbnailImage: "",
+  largeImage: "",
   groups: "",
   categories: "",
   colors: ""
@@ -46,6 +48,8 @@ const itemToForm = (item: CatalogItem): FormState => ({
   publishedStockSize: item.publishedStockSize,
   stockSizeCode: item.stockSizeCode,
   fileName: item.fileName,
+  thumbnailImage: item.thumbnailImage,
+  largeImage: item.largeImage,
   groups: listToText(item.groups),
   categories: listToText(item.categories),
   colors: listToText(item.colors),
@@ -60,6 +64,8 @@ const formToPayload = (form: FormState): CatalogItemInput => ({
   publishedStockSize: form.publishedStockSize.trim(),
   stockSizeCode: form.stockSizeCode.trim(),
   fileName: form.fileName.trim(),
+  thumbnailImage: form.thumbnailImage.trim(),
+  largeImage: form.largeImage.trim(),
   groups: textToList(form.groups),
   categories: textToList(form.categories),
   colors: textToList(form.colors),
@@ -344,6 +350,20 @@ export function CatalogManager({ initialItems }: CatalogManagerProps) {
               onChange={(event) => updateForm("fileName", event.target.value)}
               placeholder="File name"
               className="filter-input w-full rounded-xl px-3 py-2 text-sm outline-none sm:col-span-2"
+            />
+            <input
+              value={form.thumbnailImage}
+              onChange={(event) =>
+                updateForm("thumbnailImage", event.target.value)
+              }
+              placeholder="Thumbnail image path"
+              className={inputClassName}
+            />
+            <input
+              value={form.largeImage}
+              onChange={(event) => updateForm("largeImage", event.target.value)}
+              placeholder="Large image path"
+              className={inputClassName}
             />
             <textarea
               value={form.groups}

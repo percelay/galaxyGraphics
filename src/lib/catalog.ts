@@ -13,6 +13,8 @@ export type CatalogItem = {
   groups: string[];
   categories: string[];
   colors: string[];
+  thumbnailImage: string;
+  largeImage: string;
   importedAt: string;
 };
 
@@ -62,6 +64,8 @@ const CSV_HEADERS = {
   fileName: "File Name"
 } as const;
 
+const IMAGE_EXTENSION_PATTERN = /\.(jpg|jpeg|png|webp|gif|tif|tiff)$/i;
+
 const normalizeValue = (value: string | undefined): string =>
   (value ?? "").trim();
 
@@ -94,8 +98,23 @@ const normalizeCatalogItemInput = (
   groups: normalizeList(input.groups),
   categories: normalizeList(input.categories),
   colors: normalizeList(input.colors),
+  thumbnailImage: normalizeValue(input.thumbnailImage),
+  largeImage: normalizeValue(input.largeImage),
   importedAt: normalizeValue(input.importedAt) || fallbackImportedAt
 });
+
+export const imageMatchKey = (value: string): string => {
+  let key = path.basename(normalizeValue(value));
+
+  while (IMAGE_EXTENSION_PATTERN.test(key)) {
+    key = key.replace(IMAGE_EXTENSION_PATTERN, "");
+  }
+
+  return key.toLowerCase();
+};
+
+const itemMatchKeys = (item: CatalogItem): string[] =>
+  [...new Set([item.sku, item.fileName].map(imageMatchKey).filter(Boolean))];
 
 const ensureDataDir = async (): Promise<void> => {
   await mkdir(DATA_DIR, { recursive: true });
@@ -197,6 +216,8 @@ const mapCsvRowsToCatalogItems = (csv: string, importedAt: string): CatalogItem[
         groups: compactValues(groupValues),
         categories: compactValues(categoryValues),
         colors: compactValues(colorValues),
+        thumbnailImage: "",
+        largeImage: "",
         importedAt
       };
     })
@@ -260,6 +281,8 @@ export const searchCatalogItems = async ({
       item.publishedStockSize,
       item.stockSizeCode,
       item.fileName,
+      item.thumbnailImage,
+      item.largeImage,
       ...item.groups,
       ...item.categories,
       ...item.colors
@@ -377,4 +400,54 @@ export const deleteCatalogItem = async (sku: string): Promise<boolean> => {
 
   await writeCatalogItems(nextItems);
   return true;
+};
+
+export const attachCatalogImages = async (
+  images: {
+    matchKey: string;
+    thumbnailImage?: string;
+    largeImage?: string;
+  }[]
+): Promise<{
+  matched: number;
+  unmatched: string[];
+  totalCatalogItems: number;
+}> => {
+  const items = await readCatalogItemsUncached();
+  const itemByKey = new Map<string, number>();
+
+  items.forEach((item, index) => {
+    itemMatchKeys(item).forEach((key) => {
+      itemByKey.set(key, index);
+    });
+  });
+
+  const matchedIndexes = new Set<number>();
+  const unmatched = new Set<string>();
+  const nextItems = [...items];
+
+  images.forEach((image) => {
+    const index = itemByKey.get(image.matchKey);
+
+    if (index === undefined) {
+      unmatched.add(image.matchKey);
+      return;
+    }
+
+    matchedIndexes.add(index);
+    nextItems[index] = {
+      ...nextItems[index],
+      thumbnailImage:
+        image.thumbnailImage || nextItems[index].thumbnailImage || "",
+      largeImage: image.largeImage || nextItems[index].largeImage || ""
+    };
+  });
+
+  await writeCatalogItems(nextItems);
+
+  return {
+    matched: matchedIndexes.size,
+    unmatched: [...unmatched].sort(),
+    totalCatalogItems: nextItems.length
+  };
 };
