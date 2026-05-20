@@ -1,0 +1,13 @@
+Item Number,Item Name,Artist,Orientation,Published Stock Size,Stock Size Code,File Name,Group 1,Group 2,Group 3,Group 4,Category 1,Category 2,Category 3,Category 4,Category 5,Category 6,Category 7,Category 8,Category 9,Category 10,Category 11,Category 12,Category 13,Category 14,Category 15,Color 1,Color 2,Color 3,Color 4,Color 5,Color 6,Color 7,Color 8,Color 9,Color 10
+90001,Blue Harbor Morning,Avery Stone,Horizontal,24x36,LG,90001.jpg,90002,90003,,,Coastal,Landscape,Seascape,Traditional,Calm,Hospitality,Wall Decor,,,,,,,,,Blue,White,Sand,Gray,,,,,,
+90002,Blue Harbor Detail,Avery Stone,Square,18x18,SQ,90002.jpg,90001,90003,,,Coastal,Landscape,Seascape,Detail,Hospitality,Wall Decor,,,,,,,,,,Blue,White,Sand,,,,,,,
+90003,Harbor Boats at Dusk,Avery Stone,Vertical,20x30,MD,90003.jpg,90001,90002,,,Coastal,Boats,Evening,Landscape,Traditional,Wall Decor,,,,,,,,,,Navy,Gold,White,Blue,,,,,,
+90004,Soft Garden Path,Mira Chen,Horizontal,30x40,XL,90004.jpg,,,,,Floral,Garden,Landscape,Romantic,Pastel,Residential,Wall Decor,,,,,,,,,Green,Pink,White,Cream,,,,,,
+90005,Market Street Cafe,Jon Bell,Vertical,16x20,SM,90005.jpg,90006,,,,Cityscape,Cafe,Street Scene,European,Kitchen,Hospitality,Wall Decor,,,,,,,,,Red,Black,Cream,Green,,,,,,
+90006,Market Street Cafe Detail,Jon Bell,Square,12x12,SQ,90006.jpg,90005,,,,Cityscape,Cafe,Street Scene,Detail,Kitchen,Hospitality,,,,,,,,,,Red,Black,Cream,,,,,,,
+90007,Abstract Ocean Blocks,Nia Brooks,Horizontal,,LG,90007.jpg,,,,,Abstract,Geometric,Coastal,Modern,Corporate,Wall Decor,,,,,,,,,,Blue,Teal,White,Charcoal,,,,,,
+90008,Neutral Botanical Study,Elena Ruiz,Vertical,18x24,MD,90008.jpg,,,,,Botanical,Floral,Neutral,Traditional,Residential,Wall Decor,,,,,,,,,,Cream,Tan,Green,Brown,,,,,,
+90009,Golden Field Horizon,Sam Carter,Horizontal,24x30,LG,90009.jpg,90010,,,,Landscape,Farmhouse,Field,Sunset,Traditional,Hospitality,,,,,,,,,,Gold,Yellow,Green,Blue,,,,,,
+90010,Golden Field Detail,Sam Carter,Square,,SQ,90010.jpg,90009,,,,Landscape,Farmhouse,Detail,Field,Traditional,,,,,,,,,,,Gold,Yellow,Green,,,,,,,
+90011,Monochrome City Grid,CAD Designs,Horizontal,36x24,LG,90011.jpg,,,,,Architecture,Cityscape,Black and White,Modern,Corporate,Office,,,,,,,,,,Black,White,Gray,,,,,,,
+90012,Coral Reef Pattern,Nia Brooks,Square,20x20,SQ,90012.jpg,,,,,Abstract,Pattern,Coastal,Decorative,Modern,Product Design,,,,,,,,,,Coral,Teal,White,Blue,,,,,,

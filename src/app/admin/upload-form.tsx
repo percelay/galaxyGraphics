@@ -7,7 +7,7 @@ import type { CatalogUploadResult } from "@/lib/catalog";
 export function CatalogUploadForm() {
   const [file, setFile] = useState<File | null>(null);
   const [result, setResult] = useState<CatalogUploadResult | null>(null);
-  const [error, setError] = useState("");
+const [error, setError] = useState("");
   const [isUploading, setIsUploading] = useState(false);
 
   const uploadCsv = async (): Promise<void> => {
@@ -27,12 +27,15 @@ export function CatalogUploadForm() {
         method: "POST",
         body: formData
       });
-      const payload = (await response.json()) as CatalogUploadResult & {
+      const responseText = await response.text();
+      const payload = responseText
+        ? (JSON.parse(responseText) as CatalogUploadResult & {
         error?: string;
-      };
+      })
+        : null;
 
-      if (!response.ok) {
-        throw new Error(payload.error || "Upload failed.");
+      if (!response.ok || !payload) {
+        throw new Error(payload?.error || "Upload failed. Please try again.");
       }
 
       setResult(payload);
