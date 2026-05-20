@@ -1,11 +1,13 @@
 "use client";
 
-import { Search } from "lucide-react";
+import { Check, FileDown, Loader2, Plus, Search } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import type { CatalogItem, CatalogSearchResult } from "@/lib/catalog";
+import { exportCatalogSelectionPdf } from "@/lib/pdf-export";
 
 type CatalogSearchSectionProps = {
   initialResult: CatalogSearchResult;
+  brandName: string;
 };
 
 const pageSize = 60;
@@ -62,7 +64,10 @@ const itemDetail = (item: CatalogItem): string =>
     .filter(Boolean)
     .join(" • ");
 
-export function CatalogSearchSection({ initialResult }: CatalogSearchSectionProps) {
+export function CatalogSearchSection({
+  initialResult,
+  brandName
+}: CatalogSearchSectionProps) {
   const [query, setQuery] = useState("");
   const [artist, setArtist] = useState("");
   const [color, setColor] = useState("");
@@ -71,9 +76,15 @@ export function CatalogSearchSection({ initialResult }: CatalogSearchSectionProp
   const [result, setResult] = useState<CatalogSearchResult>(initialResult);
   const [isLoading, setIsLoading] = useState(false);
   const [previewItem, setPreviewItem] = useState<CatalogItem | null>(null);
+  const [selectedItems, setSelectedItems] = useState<CatalogItem[]>([]);
+  const [isExporting, setIsExporting] = useState(false);
 
   const totalPages = Math.max(1, Math.ceil(result.total / pageSize));
   const currentPage = Math.floor(offset / pageSize) + 1;
+  const selectedSkus = useMemo(
+    () => new Set(selectedItems.map((item) => item.sku)),
+    [selectedItems]
+  );
 
   useEffect(() => {
     const controller = new AbortController();
@@ -117,6 +128,35 @@ export function CatalogSearchSection({ initialResult }: CatalogSearchSectionProp
     const end = Math.min(offset + result.items.length, result.total);
     return `${start}-${end} of ${result.total}`;
   }, [offset, result.items.length, result.total]);
+
+  const toggleSelectedItem = (item: CatalogItem): void => {
+    setSelectedItems((currentItems) => {
+      if (currentItems.some((currentItem) => currentItem.sku === item.sku)) {
+        return currentItems.filter((currentItem) => currentItem.sku !== item.sku);
+      }
+
+      return [...currentItems, item];
+    });
+  };
+
+  const downloadSelection = async (): Promise<void> => {
+    if (selectedItems.length === 0 || isExporting) {
+      return;
+    }
+
+    setIsExporting(true);
+    try {
+      await exportCatalogSelectionPdf({
+        items: selectedItems,
+        brandName
+      });
+    } catch (error) {
+      console.error("Catalog PDF export failed", error);
+      window.alert("Unable to export PDF right now. Please try again.");
+    } finally {
+      setIsExporting(false);
+    }
+  };
 
   return (
     <section id="gallery" className="scroll-mt-32">
@@ -198,28 +238,31 @@ export function CatalogSearchSection({ initialResult }: CatalogSearchSectionProp
         </div>
 
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {result.items.map((item, index) => (
-            <article
-              key={item.sku}
-              className="artwork-card overflow-hidden rounded-2xl"
-            >
-              <button
-                type="button"
-                onClick={() => setPreviewItem(item)}
-                className="block w-full text-left"
+          {result.items.map((item, index) => {
+            const isSelected = selectedSkus.has(item.sku);
+
+            return (
+              <article
+                key={item.sku}
+                className="artwork-card overflow-hidden rounded-2xl"
               >
-                <img
-                  src={
-                    item.thumbnailImage ||
-                    item.largeImage ||
-                    fallbackImages[index % fallbackImages.length]
-                  }
-                  alt={item.itemName || item.sku}
-                  className="artwork-image h-44 w-full object-contain bg-surface"
-                  loading="lazy"
-                />
-              </button>
-              <div className="space-y-3 p-4">
+                <button
+                  type="button"
+                  onClick={() => setPreviewItem(item)}
+                  className="block w-full text-left"
+                >
+                  <img
+                    src={
+                      item.thumbnailImage ||
+                      item.largeImage ||
+                      fallbackImages[index % fallbackImages.length]
+                    }
+                    alt={item.itemName || item.sku}
+                    className="artwork-image h-48 w-full object-contain bg-surface"
+                    loading="lazy"
+                  />
+                </button>
+                <div className="space-y-3 p-4">
                 <div>
                   <h3 className="text-2xl">{item.itemName || "Untitled"}</h3>
                   <p className="text-sm tracking-wide text-text-muted">
@@ -229,9 +272,20 @@ export function CatalogSearchSection({ initialResult }: CatalogSearchSectionProp
                 <p className="line-clamp-2 text-sm leading-relaxed text-text-muted">
                   {item.categories.slice(0, 8).join(", ") || "No categories listed"}
                 </p>
+                <button
+                  type="button"
+                  onClick={() => toggleSelectedItem(item)}
+                  className={`inline-flex w-full items-center justify-center gap-2 px-3 py-2 text-sm font-semibold ${
+                    isSelected ? "btn-primary-watercolor" : "btn-secondary-watercolor"
+                  }`}
+                >
+                  {isSelected ? <Check size={16} /> : <Plus size={16} />}
+                  {isSelected ? "Added" : "Add to Gallery"}
+                </button>
               </div>
             </article>
-          ))}
+            );
+          })}
         </div>
 
         {previewItem ? (
@@ -297,6 +351,33 @@ export function CatalogSearchSection({ initialResult }: CatalogSearchSectionProp
           >
             Next
           </button>
+        </div>
+
+        <div className="gallery-sticky-bar sticky bottom-4 z-20 mt-8 rounded-2xl p-4 text-white">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm tracking-wide text-white/85">
+              Selected images: <span className="font-semibold">{selectedItems.length}</span>
+            </p>
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <button
+                type="button"
+                disabled={selectedItems.length === 0}
+                onClick={() => setSelectedItems([])}
+                className="btn-secondary-watercolor px-4 py-2 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:translate-y-0"
+              >
+                Clear
+              </button>
+              <button
+                type="button"
+                disabled={selectedItems.length === 0 || isExporting}
+                onClick={downloadSelection}
+                className="btn-primary-watercolor inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:translate-y-0"
+              >
+                {isExporting ? <Loader2 className="animate-spin" size={16} /> : <FileDown size={16} />}
+                {isExporting ? "Preparing PDF..." : "Download PDF"}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>

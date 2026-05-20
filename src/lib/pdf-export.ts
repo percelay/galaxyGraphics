@@ -1,4 +1,5 @@
 import type { Artwork } from "@/lib/content";
+import type { CatalogItem } from "@/lib/catalog";
 
 type RenderedPage = {
   bytes: Uint8Array;
@@ -260,6 +261,161 @@ const renderArtworkPages = async (
   return pages;
 };
 
+const drawContainedImage = (
+  context: CanvasRenderingContext2D,
+  image: HTMLImageElement,
+  x: number,
+  y: number,
+  width: number,
+  height: number
+): void => {
+  const scale = Math.min(width / image.naturalWidth, height / image.naturalHeight);
+  const drawWidth = image.naturalWidth * scale;
+  const drawHeight = image.naturalHeight * scale;
+  const drawX = x + (width - drawWidth) / 2;
+  const drawY = y + (height - drawHeight) / 2;
+
+  context.drawImage(image, drawX, drawY, drawWidth, drawHeight);
+};
+
+const catalogDetailLine = (item: CatalogItem): string =>
+  [
+    item.artist,
+    item.publishedStockSize || item.stockSizeCode,
+    item.orientation,
+    item.colors.slice(0, 4).join(", ")
+  ]
+    .filter(Boolean)
+    .join(" • ");
+
+const renderCatalogSelectionPages = async (
+  items: CatalogItem[],
+  brandName: string
+): Promise<RenderedPage[]> => {
+  const pages: RenderedPage[] = [];
+
+  for (let index = 0; index < items.length; index += 1) {
+    const item = items[index];
+    const imageSrc = item.largeImage || item.thumbnailImage;
+    let image: HTMLImageElement | null = null;
+
+    if (imageSrc) {
+      try {
+        image = await loadImage(toAssetUrl(imageSrc));
+      } catch {
+        image = null;
+      }
+    }
+
+    const canvas = document.createElement("canvas");
+    canvas.width = CANVAS_WIDTH;
+    canvas.height = CANVAS_HEIGHT;
+
+    const context = canvas.getContext("2d");
+    if (!context) {
+      throw new Error("Could not initialize 2D canvas for PDF rendering.");
+    }
+
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+    context.fillStyle = "#f2f8fd";
+    context.fillRect(0, 0, CANVAS_WIDTH, 180);
+    context.fillRect(0, CANVAS_HEIGHT - 118, CANVAS_WIDTH, 118);
+
+    context.fillStyle = "#2f80c8";
+    context.fillRect(76, 64, 56, 56);
+    context.strokeStyle = "#ffffff";
+    context.lineWidth = 6;
+    context.beginPath();
+    context.arc(104, 92, 16, 0, Math.PI * 2);
+    context.stroke();
+
+    context.fillStyle = "#122033";
+    context.font = "800 38px 'Helvetica Neue', Arial, sans-serif";
+    context.fillText(brandName.toUpperCase(), 154, 88);
+    context.fillStyle = "#2f80c8";
+    context.font = "700 19px 'Helvetica Neue', Arial, sans-serif";
+    context.fillText("CURATED IMAGE SELECTION", 156, 120);
+
+    context.fillStyle = "#63758b";
+    context.font = "600 18px 'Helvetica Neue', Arial, sans-serif";
+    context.textAlign = "right";
+    context.fillText(`PAGE ${index + 1} OF ${items.length}`, CANVAS_WIDTH - 76, 96);
+    context.textAlign = "left";
+
+    const imageBoxX = 98;
+    const imageBoxY = 245;
+    const imageBoxWidth = CANVAS_WIDTH - 196;
+    const imageBoxHeight = 910;
+
+    context.fillStyle = "#f8fcff";
+    context.fillRect(imageBoxX, imageBoxY, imageBoxWidth, imageBoxHeight);
+    context.strokeStyle = "#d7e6f3";
+    context.lineWidth = 2;
+    context.strokeRect(imageBoxX, imageBoxY, imageBoxWidth, imageBoxHeight);
+
+    if (image) {
+      drawContainedImage(
+        context,
+        image,
+        imageBoxX + 36,
+        imageBoxY + 36,
+        imageBoxWidth - 72,
+        imageBoxHeight - 72
+      );
+    } else {
+      context.fillStyle = "#63758b";
+      context.font = "600 24px 'Helvetica Neue', Arial, sans-serif";
+      context.fillText("Image unavailable", imageBoxX + 40, imageBoxY + 90);
+    }
+
+    let textY = 1245;
+    context.fillStyle = "#122033";
+    context.font = "800 44px 'Helvetica Neue', Arial, sans-serif";
+    textY = drawWrappedText(
+      context,
+      item.itemName || "Untitled",
+      98,
+      textY,
+      CANVAS_WIDTH - 196,
+      50,
+      2
+    );
+
+    context.fillStyle = "#2f80c8";
+    context.font = "700 23px 'Helvetica Neue', Arial, sans-serif";
+    context.fillText(`SKU ${item.sku}`, 98, textY + 18);
+
+    context.fillStyle = "#40536b";
+    context.font = "500 23px 'Helvetica Neue', Arial, sans-serif";
+    drawWrappedText(
+      context,
+      catalogDetailLine(item),
+      98,
+      textY + 58,
+      CANVAS_WIDTH - 196,
+      32,
+      3
+    );
+
+    context.fillStyle = "#63758b";
+    context.font = "500 18px 'Helvetica Neue', Arial, sans-serif";
+    context.fillText("Prepared for review only. Image rights remain with Galaxy Graphics.", 76, CANVAS_HEIGHT - 54);
+    context.textAlign = "right";
+    context.fillText("galaxygraphics.com", CANVAS_WIDTH - 76, CANVAS_HEIGHT - 54);
+    context.textAlign = "left";
+
+    pages.push({
+      bytes: dataUrlToBytes(canvas.toDataURL("image/jpeg", 0.94)),
+      width: CANVAS_WIDTH,
+      height: CANVAS_HEIGHT
+    });
+  }
+
+  return pages;
+};
+
 const buildPdfBlob = (pages: RenderedPage[]): Blob => {
   const objects: PdfObject[] = [];
   const pageObjectIds: number[] = [];
@@ -391,6 +547,35 @@ export const exportGalleryPdf = async ({
   const anchor = document.createElement("a");
   anchor.href = pdfUrl;
   anchor.download = `${safeBrand}-selection-${dateToken}.pdf`;
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+
+  window.setTimeout(() => {
+    URL.revokeObjectURL(pdfUrl);
+  }, 10_000);
+};
+
+export const exportCatalogSelectionPdf = async ({
+  items,
+  brandName
+}: {
+  items: CatalogItem[];
+  brandName: string;
+}): Promise<void> => {
+  if (items.length === 0) {
+    return;
+  }
+
+  const pages = await renderCatalogSelectionPages(items, brandName);
+  const pdfBlob = buildPdfBlob(pages);
+  const pdfUrl = URL.createObjectURL(pdfBlob);
+  const safeBrand = brandName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  const dateToken = new Date().toISOString().slice(0, 10);
+
+  const anchor = document.createElement("a");
+  anchor.href = pdfUrl;
+  anchor.download = `${safeBrand}-gallery-selection-${dateToken}.pdf`;
   document.body.appendChild(anchor);
   anchor.click();
   anchor.remove();

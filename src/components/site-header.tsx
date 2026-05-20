@@ -1,5 +1,3 @@
-import { Sparkles } from "lucide-react";
-
 type SiteHeaderProps = {
   brand: string;
 };
@@ -19,10 +17,13 @@ export function SiteHeader({ brand }: SiteHeaderProps) {
         <div className="site-nav-shell flex flex-col gap-3 rounded-2xl px-4 py-3 sm:px-6 sm:py-4 md:flex-row md:items-center md:justify-between md:gap-8">
           <a
             href="/"
-            className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-text-main"
+            className="inline-flex items-center gap-3 text-sm font-semibold tracking-wide text-text-main"
           >
-            <Sparkles size={16} className="text-primary" />
-            <span className="brand-wordmark">{brand}</span>
+            <span className="brand-logo-mark" aria-hidden="true" />
+            <span className="brand-wordmark">
+              <span>{brand.split(" ")[0]}</span>
+              <span>{brand.split(" ").slice(1).join(" ") || "Graphics"}</span>
+            </span>
           </a>
 
           <nav className="flex w-full items-center gap-4 overflow-x-auto text-xs sm:text-sm md:w-auto md:gap-7">
