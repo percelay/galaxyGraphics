@@ -16,6 +16,10 @@ export type CatalogItem = {
   importedAt: string;
 };
 
+export type CatalogItemInput = Omit<CatalogItem, "importedAt"> & {
+  importedAt?: string;
+};
+
 export type CatalogUploadResult = {
   inserted: number;
   skipped: number;
@@ -63,6 +67,35 @@ const normalizeValue = (value: string | undefined): string =>
 
 const compactValues = (values: string[]): string[] =>
   values.map(normalizeValue).filter(Boolean);
+
+const normalizeList = (value: unknown): string[] => {
+  if (Array.isArray(value)) {
+    return compactValues(value.map((item) => String(item ?? "")));
+  }
+
+  if (typeof value === "string") {
+    return compactValues(value.split(","));
+  }
+
+  return [];
+};
+
+const normalizeCatalogItemInput = (
+  input: Partial<CatalogItemInput>,
+  fallbackImportedAt = new Date().toISOString()
+): CatalogItem => ({
+  sku: normalizeValue(input.sku),
+  itemName: normalizeValue(input.itemName),
+  artist: normalizeValue(input.artist),
+  orientation: normalizeValue(input.orientation),
+  publishedStockSize: normalizeValue(input.publishedStockSize),
+  stockSizeCode: normalizeValue(input.stockSizeCode),
+  fileName: normalizeValue(input.fileName),
+  groups: normalizeList(input.groups),
+  categories: normalizeList(input.categories),
+  colors: normalizeList(input.colors),
+  importedAt: normalizeValue(input.importedAt) || fallbackImportedAt
+});
 
 const ensureDataDir = async (): Promise<void> => {
   await mkdir(DATA_DIR, { recursive: true });
@@ -283,4 +316,65 @@ export const importCatalogCsv = async (
     totalCatalogItems: catalogItems.length,
     sampleItems: newItems.slice(0, 5)
   };
+};
+
+export const addCatalogItem = async (
+  input: Partial<CatalogItemInput>
+): Promise<CatalogItem> => {
+  const item = normalizeCatalogItemInput(input);
+
+  if (!item.sku) {
+    throw new Error("SKU is required.");
+  }
+
+  const items = await readCatalogItemsUncached();
+
+  if (items.some((existingItem) => existingItem.sku === item.sku)) {
+    throw new Error("A record with this SKU already exists.");
+  }
+
+  await writeCatalogItems([...items, item]);
+  return item;
+};
+
+export const updateCatalogItem = async (
+  sku: string,
+  input: Partial<CatalogItemInput>
+): Promise<CatalogItem | null> => {
+  const normalizedSku = normalizeValue(sku);
+  const items = await readCatalogItemsUncached();
+  const existingIndex = items.findIndex((item) => item.sku === normalizedSku);
+
+  if (existingIndex === -1) {
+    return null;
+  }
+
+  const existingItem = items[existingIndex];
+  const updatedItem = normalizeCatalogItemInput(
+    {
+      ...existingItem,
+      ...input,
+      sku: normalizedSku,
+      importedAt: existingItem.importedAt
+    },
+    existingItem.importedAt
+  );
+  const nextItems = [...items];
+  nextItems[existingIndex] = updatedItem;
+  await writeCatalogItems(nextItems);
+
+  return updatedItem;
+};
+
+export const deleteCatalogItem = async (sku: string): Promise<boolean> => {
+  const normalizedSku = normalizeValue(sku);
+  const items = await readCatalogItemsUncached();
+  const nextItems = items.filter((item) => item.sku !== normalizedSku);
+
+  if (nextItems.length === items.length) {
+    return false;
+  }
+
+  await writeCatalogItems(nextItems);
+  return true;
 };
