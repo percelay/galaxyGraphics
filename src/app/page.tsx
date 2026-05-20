@@ -1,11 +1,20 @@
 import { ArrowRight, Mail, Palette, ShieldCheck } from "lucide-react";
 import Image from "next/image";
+import { CatalogSearchSection } from "@/components/catalog-search-section";
 import { GallerySection } from "@/components/gallery-section";
 import { SiteHeader } from "@/components/site-header";
+import { getCatalogItems, searchCatalogItems } from "@/lib/catalog";
 import { getSiteContent } from "@/lib/content";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
   const content = getSiteContent();
+  const catalogItems = await getCatalogItems();
+  const initialCatalogResult =
+    catalogItems.length > 0
+      ? await searchCatalogItems({ limit: 60 })
+      : null;
   const licensingText = content.licensing.join(" ");
 
   return (
@@ -101,12 +110,16 @@ export default function Home() {
           </div>
         </section>
 
-        <GallerySection
-          intro={content.galleryIntro}
-          licensingText={licensingText}
-          brandName={content.name}
-          artworks={content.artworks}
-        />
+        {initialCatalogResult ? (
+          <CatalogSearchSection initialResult={initialCatalogResult} />
+        ) : (
+          <GallerySection
+            intro={content.galleryIntro}
+            licensingText={licensingText}
+            brandName={content.name}
+            artworks={content.artworks}
+          />
+        )}
 
         <section
           id="contact"

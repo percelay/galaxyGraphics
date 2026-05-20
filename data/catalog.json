@@ -1,0 +1,1800 @@
+[
+  {
+    "sku": "12767",
+    "itemName": "Gino's Pizzeria",
+    "artist": "Manning,Ruane",
+    "orientation": "Horizontal",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "12767.tif",
+    "groups": [
+      "13101",
+      "13102"
+    ],
+    "categories": [
+      "Florals",
+      "Cityscape",
+      "Street Scene",
+      "European",
+      "Café Scenes",
+      "Italian",
+      "Picturesque",
+      "Romantic",
+      "Kitchen"
+    ],
+    "colors": [
+      "Blue",
+      "Red",
+      "White",
+      "Green",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "13101",
+    "itemName": "Gino's Pizzeria (Detail)",
+    "artist": "Manning,Ruane",
+    "orientation": "Square",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "13101.tif",
+    "groups": [
+      "12767",
+      "13102"
+    ],
+    "categories": [
+      "Florals",
+      "Cityscape",
+      "Street Scene",
+      "European",
+      "Café Scenes",
+      "Italian",
+      "Picturesque",
+      "Romantic",
+      "Kitchen"
+    ],
+    "colors": [
+      "Blue",
+      "Red",
+      "White",
+      "Green",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "13102",
+    "itemName": "Centro  Piazza Café",
+    "artist": "Manning,Ruane",
+    "orientation": "Square",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "13102.tif",
+    "groups": [
+      "12767",
+      "13101"
+    ],
+    "categories": [
+      "Florals",
+      "Cityscape",
+      "Street Scene",
+      "European",
+      "Café Scenes",
+      "Italian",
+      "Picturesque",
+      "Romantic",
+      "Kitchen"
+    ],
+    "colors": [
+      "Blue",
+      "Red",
+      "White",
+      "Green",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "13228",
+    "itemName": "Riverwalk Charm",
+    "artist": "Manning,Ruane",
+    "orientation": "Horizontal",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "13228.tif",
+    "groups": [],
+    "categories": [
+      "Architecture",
+      "Landscape",
+      "European",
+      "Cityscape",
+      "Café Scenes",
+      "Romantic",
+      "Impressionism",
+      "Elegant",
+      "Painterly",
+      "Floral",
+      "Street Scene",
+      "Kitchen",
+      "Bridge"
+    ],
+    "colors": [
+      "Brown",
+      "Red",
+      "Yellow",
+      "Green",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "17820",
+    "itemName": "Imperial Blue",
+    "artist": "Donovan,Kelly",
+    "orientation": "Vertical",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "17820.tif",
+    "groups": [
+      "17821",
+      "17822",
+      "17823"
+    ],
+    "categories": [
+      "Vintage",
+      "Still Life",
+      "Botanical",
+      "Floral",
+      "Decorative",
+      "Illustrative",
+      "Antique",
+      "Horticulture",
+      "Nature",
+      "Traditional"
+    ],
+    "colors": [
+      "White",
+      "Green",
+      "Blue",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "17821",
+    "itemName": "Cape Leadwort",
+    "artist": "Donovan,Kelly",
+    "orientation": "Vertical",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "17821.tif",
+    "groups": [
+      "17820",
+      "17822",
+      "17823"
+    ],
+    "categories": [
+      "Vintage",
+      "Still Life",
+      "Botanical",
+      "Floral",
+      "Decorative",
+      "Illustrative",
+      "Antique",
+      "Horticulture",
+      "Nature",
+      "Traditional"
+    ],
+    "colors": [
+      "White",
+      "Green",
+      "Blue",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "17822",
+    "itemName": "Lavender",
+    "artist": "Donovan,Kelly",
+    "orientation": "Vertical",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "17822.tif",
+    "groups": [
+      "17820",
+      "17821",
+      "17823"
+    ],
+    "categories": [
+      "Vintage",
+      "Still Life",
+      "Botanical",
+      "Floral",
+      "Decorative",
+      "Illustrative",
+      "Antique",
+      "Horticulture",
+      "Nature",
+      "Traditional"
+    ],
+    "colors": [
+      "White",
+      "Green",
+      "Blue",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "17823",
+    "itemName": "Caladrinia",
+    "artist": "Donovan,Kelly",
+    "orientation": "Vertical",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "17823.tif",
+    "groups": [
+      "17820",
+      "17821",
+      "17822"
+    ],
+    "categories": [
+      "Vintage",
+      "Still Life",
+      "Botanical",
+      "Floral",
+      "Decorative",
+      "Illustrative",
+      "Antique",
+      "Horticulture",
+      "Nature",
+      "Traditional"
+    ],
+    "colors": [
+      "White",
+      "Green",
+      "Blue",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "18868",
+    "itemName": "Water's Edge I",
+    "artist": "Robinson,Carol",
+    "orientation": "Horizontal",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "18868.tif",
+    "groups": [
+      "18869"
+    ],
+    "categories": [
+      "Nature",
+      "Decorative",
+      "Abstract",
+      "Contemporary",
+      "Landscape",
+      "Watercolor",
+      "Tranquil",
+      "Sophisticated",
+      "Trees",
+      "Minimalist"
+    ],
+    "colors": [
+      "Gray",
+      "Tan",
+      "White",
+      "Blue",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "18869",
+    "itemName": "Water's Edge II",
+    "artist": "Robinson,Carol",
+    "orientation": "Horizontal",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "18869.tif",
+    "groups": [
+      "18868"
+    ],
+    "categories": [
+      "Nature",
+      "Decorative",
+      "Abstract",
+      "Contemporary",
+      "Landscape",
+      "Watercolor",
+      "Tranquil",
+      "Sophisticated",
+      "Trees",
+      "Minimalist"
+    ],
+    "colors": [
+      "Gray",
+      "Tan",
+      "White",
+      "Blue",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "41176",
+    "itemName": "Beach Combers",
+    "artist": "Swatland,Sally",
+    "orientation": "Horizontal",
+    "publishedStockSize": "22x28",
+    "stockSizeCode": "GOGU",
+    "fileName": "41176.tif",
+    "groups": [],
+    "categories": [
+      "Nature",
+      "Coastal",
+      "Landscape",
+      "Seascape",
+      "Animals",
+      "Birds",
+      "Ocean",
+      "Beach",
+      "Sky",
+      "Sunset"
+    ],
+    "colors": [
+      "Tan",
+      "White",
+      "Green",
+      "Blue",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "42184",
+    "itemName": "Safari Stand Tall",
+    "artist": "Carpentieri,Natalie",
+    "orientation": "Horizontal",
+    "publishedStockSize": "11x14",
+    "stockSizeCode": "GOGT",
+    "fileName": "42184.tif",
+    "groups": [
+      "42185",
+      "42186",
+      "42187",
+      "42188"
+    ],
+    "categories": [
+      "Animals",
+      "Juvenile",
+      "Giraffe",
+      "Nursery",
+      "Typography",
+      "Watercolor",
+      "Whimsical",
+      "Bedroom",
+      "Nursery",
+      "Illustrative",
+      "Inspirational"
+    ],
+    "colors": [
+      "Brown",
+      "Gray",
+      "Yellow",
+      "Pink",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "42185",
+    "itemName": "Safari Dream Big",
+    "artist": "Carpentieri,Natalie",
+    "orientation": "Vertical",
+    "publishedStockSize": "11x14",
+    "stockSizeCode": "GOGT",
+    "fileName": "42185.tif",
+    "groups": [
+      "42184",
+      "42186",
+      "42187",
+      "42188"
+    ],
+    "categories": [
+      "Animals",
+      "Juvenile",
+      "Elephant",
+      "Nursery",
+      "Typography",
+      "Watercolor",
+      "Whimsical",
+      "Bedroom",
+      "Nursery",
+      "Illustrative",
+      "Inspirational"
+    ],
+    "colors": [
+      "Teal",
+      "Gray",
+      "Pink",
+      "Blue",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "42186",
+    "itemName": "Safari Be Brace",
+    "artist": "Carpentieri,Natalie",
+    "orientation": "Vertical",
+    "publishedStockSize": "11x14",
+    "stockSizeCode": "GOGT",
+    "fileName": "42186.tif",
+    "groups": [
+      "42184",
+      "42185",
+      "42187",
+      "42188"
+    ],
+    "categories": [
+      "Animals",
+      "Juvenile",
+      "Lion",
+      "Nursery",
+      "Typography",
+      "Watercolor",
+      "Whimsical",
+      "Bedroom",
+      "Nursery",
+      "Illustrative",
+      "Inspirational"
+    ],
+    "colors": [
+      "Brown",
+      "Gray",
+      "Yellow",
+      "Pink"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "42187",
+    "itemName": "Safari Be Unique",
+    "artist": "Carpentieri,Natalie",
+    "orientation": "Vertical",
+    "publishedStockSize": "11x14",
+    "stockSizeCode": "GOGT",
+    "fileName": "42187.tif",
+    "groups": [
+      "42184",
+      "42185",
+      "42186",
+      "42188"
+    ],
+    "categories": [
+      "Animals",
+      "Juvenile",
+      "Zebra",
+      "Nursery",
+      "Typography",
+      "Watercolor",
+      "Whimsical",
+      "Bedroom",
+      "Nursery",
+      "Illustrative",
+      "Inspirational"
+    ],
+    "colors": [
+      "Gray",
+      "Black",
+      "White",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "42188",
+    "itemName": "Born to Stand Out",
+    "artist": "Carpentieri,Natalie",
+    "orientation": "Horizontal",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "42188.tif",
+    "groups": [
+      "42184",
+      "42185",
+      "42186",
+      "42187"
+    ],
+    "categories": [
+      "Animals",
+      "Juvenile",
+      "Zoo Animals",
+      "Nursery",
+      "Typography",
+      "Watercolor",
+      "Whimsical",
+      "Bedroom",
+      "Nursery",
+      "Illustrative",
+      "Inspirational"
+    ],
+    "colors": [
+      "Brown",
+      "Black",
+      "Yellow",
+      "Blue",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "45805",
+    "itemName": "Fissures I",
+    "artist": "Santiago,Daniela",
+    "orientation": "Vertical",
+    "publishedStockSize": "11x14",
+    "stockSizeCode": "GOGT",
+    "fileName": "45805.tif",
+    "groups": [
+      "45806"
+    ],
+    "categories": [
+      "Decorative",
+      "Abstract",
+      "Contemporary",
+      "Patterns",
+      "Geometric",
+      "Shapes",
+      "Lines",
+      "Minimalistic"
+    ],
+    "colors": [
+      "Gray",
+      "White",
+      "Cream",
+      "Neutral"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "45806",
+    "itemName": "Fissures II",
+    "artist": "Santiago,Daniela",
+    "orientation": "Vertical",
+    "publishedStockSize": "11x14",
+    "stockSizeCode": "GOGT",
+    "fileName": "45806.tif",
+    "groups": [
+      "45805"
+    ],
+    "categories": [
+      "Decorative",
+      "Abstract",
+      "Contemporary",
+      "Patterns",
+      "Geometric",
+      "Shapes",
+      "Lines",
+      "Minimalistic"
+    ],
+    "colors": [
+      "Gray",
+      "White",
+      "Cream",
+      "Neutral"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "46633",
+    "itemName": "Setting Sail",
+    "artist": "Nan",
+    "orientation": "Vertical",
+    "publishedStockSize": "12x18",
+    "stockSizeCode": "GOGV",
+    "fileName": "46633.tif",
+    "groups": [
+      "46634"
+    ],
+    "categories": [
+      "Transportation",
+      "Abstract",
+      "Contemporary",
+      "Coastal",
+      "Boats",
+      "Impressionism",
+      "Ocean",
+      "Sky",
+      "Clouds",
+      "Seascape"
+    ],
+    "colors": [
+      "Tan",
+      "White",
+      "Turquoise",
+      "Blue",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "46634",
+    "itemName": "Catching Wind",
+    "artist": "Nan",
+    "orientation": "Vertical",
+    "publishedStockSize": "12x18",
+    "stockSizeCode": "GOGV",
+    "fileName": "46634.tif",
+    "groups": [
+      "46633"
+    ],
+    "categories": [
+      "Transportation",
+      "Abstract",
+      "Contemporary",
+      "Coastal",
+      "Boats",
+      "Impressionism",
+      "Ocean",
+      "Sky",
+      "Clouds",
+      "Seascape"
+    ],
+    "colors": [
+      "Tan",
+      "White",
+      "Turquoise",
+      "Blue",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "46857",
+    "itemName": "Coast Watching I",
+    "artist": "Swatland,Sally",
+    "orientation": "Vertical",
+    "publishedStockSize": "12x18",
+    "stockSizeCode": "GOGV",
+    "fileName": "46857.tif",
+    "groups": [
+      "46858"
+    ],
+    "categories": [
+      "Contemporary",
+      "Coastal",
+      "Animals",
+      "Wildlife",
+      "Nature",
+      "Egret",
+      "Birds",
+      "Ocean",
+      "Watercolor",
+      "Impressionism"
+    ],
+    "colors": [
+      "Gray",
+      "White",
+      "Cream",
+      "Gold",
+      "Metallic",
+      "Neutral"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "46858",
+    "itemName": "Coast Watching II",
+    "artist": "Swatland,Sally",
+    "orientation": "Vertical",
+    "publishedStockSize": "12x18",
+    "stockSizeCode": "GOGV",
+    "fileName": "46858.tif",
+    "groups": [
+      "46857"
+    ],
+    "categories": [
+      "Contemporary",
+      "Coastal",
+      "Animals",
+      "Wildlife",
+      "Nature",
+      "Egret",
+      "Birds",
+      "Ocean",
+      "Watercolor",
+      "Impressionism"
+    ],
+    "colors": [
+      "Gray",
+      "White",
+      "Cream",
+      "Gold",
+      "Metallic",
+      "Neutral"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "47125",
+    "itemName": "Out to Pasture I",
+    "artist": "Jill,Susan",
+    "orientation": "Vertical",
+    "publishedStockSize": "16x20",
+    "stockSizeCode": "GOGH",
+    "fileName": "47125.tif",
+    "groups": [
+      "47126"
+    ],
+    "categories": [
+      "Nature",
+      "Landscapes",
+      "Animals",
+      "Farm",
+      "Sky",
+      "Outdoors",
+      "Field",
+      "Impressionism"
+    ],
+    "colors": [
+      "Gray",
+      "White",
+      "Black",
+      "Green",
+      "Blue"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "47126",
+    "itemName": "Out to Pasture II",
+    "artist": "Jill,Susan",
+    "orientation": "Vertical",
+    "publishedStockSize": "16x20",
+    "stockSizeCode": "GOGH",
+    "fileName": "47126.tif",
+    "groups": [
+      "47125"
+    ],
+    "categories": [
+      "Nature",
+      "Landscapes",
+      "Animals",
+      "Farm",
+      "Sky",
+      "Outdoors",
+      "Field",
+      "Impressionism"
+    ],
+    "colors": [
+      "Gray",
+      "White",
+      "Black",
+      "Green",
+      "Blue"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "48492",
+    "itemName": "Flutter of Wings I",
+    "artist": "Robinson,Carol",
+    "orientation": "Square",
+    "publishedStockSize": "12x12",
+    "stockSizeCode": "GOGP",
+    "fileName": "48492.tif",
+    "groups": [
+      "48493"
+    ],
+    "categories": [
+      "Botanical",
+      "Floral",
+      "Decorative",
+      "Animals",
+      "Nature",
+      "Whimsical",
+      "Watercolor",
+      "Impressionism",
+      "Tranquil",
+      "Branches",
+      "Birds"
+    ],
+    "colors": [
+      "Brown",
+      "Gray",
+      "Tan",
+      "White",
+      "Cream",
+      "Neutral"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "48493",
+    "itemName": "Flutter of Wings II",
+    "artist": "Robinson,Carol",
+    "orientation": "Square",
+    "publishedStockSize": "12x12",
+    "stockSizeCode": "GOGP",
+    "fileName": "48493.tif",
+    "groups": [
+      "48492"
+    ],
+    "categories": [
+      "Botanical",
+      "Floral",
+      "Decorative",
+      "Animals",
+      "Nature",
+      "Whimsical",
+      "Watercolor",
+      "Impressionism",
+      "Tranquil",
+      "Branches",
+      "Birds"
+    ],
+    "colors": [
+      "Brown",
+      "Gray",
+      "Tan",
+      "White",
+      "Cream",
+      "Neutral"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "48687",
+    "itemName": "Seagull Bay I",
+    "artist": "Swatland,Sally",
+    "orientation": "Vertical",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "48687.tif",
+    "groups": [
+      "48688"
+    ],
+    "categories": [
+      "Nature",
+      "Abstract",
+      "Contemporary",
+      "Coastal",
+      "Birds",
+      "Ocean",
+      "Seagulls",
+      "Beach",
+      "Landscape",
+      "Impressionism"
+    ],
+    "colors": [
+      "Gray",
+      "Tan",
+      "White",
+      "Cream",
+      "Blue"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "48688",
+    "itemName": "Seagull Bay II",
+    "artist": "Swatland,Sally",
+    "orientation": "Vertical",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "48688.tif",
+    "groups": [
+      "48687"
+    ],
+    "categories": [
+      "Nature",
+      "Abstract",
+      "Contemporary",
+      "Coastal",
+      "Birds",
+      "Ocean",
+      "Seagulls",
+      "Beach",
+      "Landscape",
+      "Impressionism"
+    ],
+    "colors": [
+      "Gray",
+      "Tan",
+      "White",
+      "Cream",
+      "Blue"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "48965",
+    "itemName": "Organic Strokes I",
+    "artist": "Shapiro,Judith",
+    "orientation": "Vertical",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "48965.tif",
+    "groups": [
+      "51362"
+    ],
+    "categories": [
+      "Abstract",
+      "Contemporary",
+      "Movement",
+      "Energy",
+      "Geometric",
+      "Expressionism",
+      "Minimalism"
+    ],
+    "colors": [
+      "Black",
+      "White"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "50172",
+    "itemName": "Textured Treeline I",
+    "artist": "Robinson,Carol",
+    "orientation": "Square",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "50172.tif",
+    "groups": [
+      "50173"
+    ],
+    "categories": [
+      "Abstract",
+      "Contemporary",
+      "Landscape",
+      "Nature",
+      "Water",
+      "Serene",
+      "Tranquil",
+      "Trees",
+      "Impressionism"
+    ],
+    "colors": [
+      "Brown",
+      "Gray",
+      "Green",
+      "Blue",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "50173",
+    "itemName": "Textured Treeline II",
+    "artist": "Robinson,Carol",
+    "orientation": "Square",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "50173.tif",
+    "groups": [
+      "50172"
+    ],
+    "categories": [
+      "Abstract",
+      "Contemporary",
+      "Landscape",
+      "Nature",
+      "Water",
+      "Serene",
+      "Tranquil",
+      "Trees",
+      "Impressionism"
+    ],
+    "colors": [
+      "Brown",
+      "Gray",
+      "Green",
+      "Blue",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "51342",
+    "itemName": "Simplicity",
+    "artist": "Jill,Susan",
+    "orientation": "Square",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "51342.tif",
+    "groups": [],
+    "categories": [
+      "Abstract",
+      "Contemporary",
+      "Minimalism",
+      "Brushstrokes",
+      "Modern",
+      "Graphic",
+      "Expressive"
+    ],
+    "colors": [
+      "Black",
+      "White"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "51349",
+    "itemName": "Together is Better",
+    "artist": "SSP LLC",
+    "orientation": "Vertical",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "51349.tif",
+    "groups": [],
+    "categories": [
+      "Animals",
+      "Photography",
+      "Wildlife",
+      "African",
+      "Elephants",
+      "Vintage",
+      "Sepia",
+      "Intimate",
+      "Friendship"
+    ],
+    "colors": [
+      "Brown",
+      "Gray",
+      "Black",
+      "White",
+      "Tan"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "51362",
+    "itemName": "Organic Strokes II",
+    "artist": "Shapiro,Judith",
+    "orientation": "Vertical",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "51362.tif",
+    "groups": [
+      "48965"
+    ],
+    "categories": [
+      "Abstract",
+      "Contemporary",
+      "Movement",
+      "Energy",
+      "Geometric",
+      "Expressionism",
+      "Minimalism"
+    ],
+    "colors": [
+      "Black",
+      "White"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "51363",
+    "itemName": "Fall Moon I",
+    "artist": "Jill,Susan",
+    "orientation": "Square",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "51363.tif",
+    "groups": [
+      "51364"
+    ],
+    "categories": [
+      "Abstract",
+      "Contemporary",
+      "Decorative",
+      "Geometric",
+      "Collage",
+      "Painting",
+      "Movement",
+      "Graphic Design",
+      "Collage"
+    ],
+    "colors": [
+      "Brown",
+      "Gray",
+      "Black",
+      "Tan",
+      "Cream",
+      "Neutral"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "51364",
+    "itemName": "Fall Moon II",
+    "artist": "Jill,Susan",
+    "orientation": "Square",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "51364.tif",
+    "groups": [
+      "51363"
+    ],
+    "categories": [
+      "Abstract",
+      "Contemporary",
+      "Decorative",
+      "Geometric",
+      "Collage",
+      "Painting",
+      "Movement",
+      "Graphic Design",
+      "Collage"
+    ],
+    "colors": [
+      "Brown",
+      "Gray",
+      "Black",
+      "Tan",
+      "Cream",
+      "Neutral"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "51369",
+    "itemName": "Lovely Bouquet",
+    "artist": "Robinson,Carol",
+    "orientation": "Square",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "51369.tif",
+    "groups": [],
+    "categories": [
+      "Florals",
+      "Still Life",
+      "Botanical",
+      "Decorative",
+      "Contemporary",
+      "Vintage",
+      "Bouquet",
+      "Rustic"
+    ],
+    "colors": [
+      "Gray",
+      "White",
+      "Green",
+      "Pink",
+      "Cream",
+      "Blue",
+      "Purple"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "51408",
+    "itemName": "Field of Blue",
+    "artist": "Swatland,Sally",
+    "orientation": "Horizontal",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "51408.tif",
+    "groups": [],
+    "categories": [
+      "Florals",
+      "Botanical",
+      "Decorative",
+      "Contemporary",
+      "Garden",
+      "Impressionism",
+      "Nature",
+      "Canvas",
+      "Romantic",
+      "Garden"
+    ],
+    "colors": [
+      "Tan",
+      "White",
+      "Green",
+      "Blue",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "51457",
+    "itemName": "Neutral Roses",
+    "artist": "Van Gogh,Vincent",
+    "orientation": "Vertical",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "51457.tif",
+    "groups": [],
+    "categories": [
+      "Florals",
+      "Masters",
+      "Traditional",
+      "Still Life",
+      "Botanical",
+      "Vintage",
+      "Oil Painting",
+      "Roses",
+      "Museum",
+      "Post Impressionism",
+      "Vases"
+    ],
+    "colors": [
+      "Brown",
+      "White",
+      "Green",
+      "Cream",
+      "Neutral"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "51490",
+    "itemName": "Into the Brush I",
+    "artist": "Nan",
+    "orientation": "Vertical",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "51490.tif",
+    "groups": [
+      "51491"
+    ],
+    "categories": [
+      "Contemporary",
+      "Landscapes",
+      "Nature",
+      "Abstract",
+      "Impressionism",
+      "Sky",
+      "Trees",
+      "Countryside",
+      "Meadow"
+    ],
+    "colors": [
+      "Brown",
+      "Gray",
+      "Yellow",
+      "Green",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "51491",
+    "itemName": "Into the Brush II",
+    "artist": "Nan",
+    "orientation": "Vertical",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "51491.tif",
+    "groups": [
+      "51490"
+    ],
+    "categories": [
+      "Contemporary",
+      "Landscapes",
+      "Nature",
+      "Abstract",
+      "Impressionism",
+      "Sky",
+      "Trees",
+      "Countryside",
+      "Meadow"
+    ],
+    "colors": [
+      "Brown",
+      "Gray",
+      "Yellow",
+      "Green",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "52084",
+    "itemName": "Family Portrait I",
+    "artist": "CAD Designs",
+    "orientation": "Vertical",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "52084.tif",
+    "groups": [
+      "52085"
+    ],
+    "categories": [
+      "Traditional",
+      "Figurative",
+      "Animals",
+      "European",
+      "Pets",
+      "Vintage",
+      "Portrait",
+      "Whimsical",
+      "Baroque",
+      "Dogs"
+    ],
+    "colors": [
+      "Brown",
+      "Red",
+      "Black",
+      "White",
+      "Gold"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "52085",
+    "itemName": "Family Portrait II",
+    "artist": "CAD Designs",
+    "orientation": "Vertical",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "52085.tif",
+    "groups": [
+      "52084"
+    ],
+    "categories": [
+      "Traditional",
+      "Figurative",
+      "Animals",
+      "European",
+      "Pets",
+      "Vintage",
+      "Portrait",
+      "Whimsical",
+      "Baroque",
+      "Cats"
+    ],
+    "colors": [
+      "Brown",
+      "Red",
+      "Yellow",
+      "White",
+      "Green"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "52108",
+    "itemName": "Field Master",
+    "artist": "CAD Designs",
+    "orientation": "Vertical",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "52108.tif",
+    "groups": [],
+    "categories": [
+      "Nature",
+      "Photography",
+      "Animals",
+      "Wildlife",
+      "Highland Cow",
+      "Countryside",
+      "Vintage",
+      "Cattle",
+      "Sepia",
+      "Farm Animal"
+    ],
+    "colors": [
+      "Brown",
+      "Gray",
+      "Tan",
+      "White",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "52118",
+    "itemName": "The Flower Patch",
+    "artist": "Nan",
+    "orientation": "Horizontal",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "52118.tif",
+    "groups": [],
+    "categories": [
+      "Vintage",
+      "Floral",
+      "Landscape",
+      "Farmhouse",
+      "Garden",
+      "Rustic",
+      "Countryside",
+      "Farm",
+      "Seasonal",
+      "Truck",
+      "Transportation",
+      "Americana"
+    ],
+    "colors": [
+      "Brown",
+      "Yellow",
+      "White",
+      "Green",
+      "Pink",
+      "Blue",
+      "Red",
+      "Blush"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "52125",
+    "itemName": "Rosie Bath I",
+    "artist": "Walker, Abigail",
+    "orientation": "Square",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "52125.tif",
+    "groups": [
+      "52126",
+      "52127",
+      "52128"
+    ],
+    "categories": [
+      "Humor",
+      "Animals",
+      "Bathroom",
+      "Pets",
+      "Whimsical",
+      "Dog",
+      "Pet",
+      "Playful",
+      "Humorous",
+      "Bathroom"
+    ],
+    "colors": [
+      "Brown",
+      "Gray",
+      "Tan",
+      "White",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "52126",
+    "itemName": "Rosie Bath II",
+    "artist": "Walker, Abigail",
+    "orientation": "Square",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "52126.tif",
+    "groups": [
+      "52125",
+      "52127",
+      "52128"
+    ],
+    "categories": [
+      "Humor",
+      "Animals",
+      "Bathroom",
+      "Pets",
+      "Whimsical",
+      "Dog",
+      "Pet",
+      "Playful",
+      "Humorous",
+      "Bathroom"
+    ],
+    "colors": [
+      "Brown",
+      "Gray",
+      "Tan",
+      "White",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "52127",
+    "itemName": "Rosie Bath III",
+    "artist": "Walker, Abigail",
+    "orientation": "Square",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "52127.tif",
+    "groups": [
+      "52125",
+      "52126",
+      "52128"
+    ],
+    "categories": [
+      "Humor",
+      "Animals",
+      "Bathroom",
+      "Pets",
+      "Whimsical",
+      "Dog",
+      "Pet",
+      "Playful",
+      "Humorous",
+      "Bathroom"
+    ],
+    "colors": [
+      "Brown",
+      "Gray",
+      "Tan",
+      "White",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "52128",
+    "itemName": "Rosie Bath IV",
+    "artist": "Walker, Abigail",
+    "orientation": "Square",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "52128.tif",
+    "groups": [
+      "52125",
+      "52126",
+      "52127"
+    ],
+    "categories": [
+      "Humor",
+      "Animals",
+      "Bathroom",
+      "Pets",
+      "Whimsical",
+      "Dog",
+      "Pet",
+      "Playful",
+      "Humorous",
+      "Bathroom"
+    ],
+    "colors": [
+      "Brown",
+      "Gray",
+      "Tan",
+      "White",
+      "Cream"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "52135",
+    "itemName": "Nautical Glass Floats",
+    "artist": "Robinson,Carol",
+    "orientation": "Square",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "52135.tif",
+    "groups": [],
+    "categories": [
+      "Decorative",
+      "Abstract",
+      "Patterns",
+      "Geometric",
+      "Watercolor",
+      "Pattern",
+      "Contemporary",
+      "Minerals",
+      "Sea Glass"
+    ],
+    "colors": [
+      "Brown",
+      "Gray",
+      "Tan",
+      "Green",
+      "Blue"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "52140",
+    "itemName": "Waterfront Garden",
+    "artist": "Robinson,Carol",
+    "orientation": "Horizontal",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "52140.tif",
+    "groups": [],
+    "categories": [
+      "Still Life",
+      "Nature",
+      "Floral",
+      "Decorative",
+      "Coastal",
+      "Watercolor",
+      "Ocean",
+      "Beach",
+      "Sky",
+      "Clouds",
+      "Pitcher"
+    ],
+    "colors": [
+      "Gray",
+      "Tan",
+      "White",
+      "Green",
+      "Blue",
+      "Coral",
+      "Orange",
+      "Blush"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "52147",
+    "itemName": "Cocktail Hour Cosmo",
+    "artist": "Jill,Susan",
+    "orientation": "Square",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "52147.tif",
+    "groups": [
+      "52148"
+    ],
+    "categories": [
+      "Still Life",
+      "Decorative",
+      "Food",
+      "Cuisine",
+      "Alcohol",
+      "Vintage",
+      "Sophisticated",
+      "Kitchen",
+      "Den",
+      "Self Matted",
+      "Drinks",
+      "Bordered Effect",
+      "Stripes"
+    ],
+    "colors": [
+      "Black",
+      "Yellow",
+      "Green",
+      "Pink",
+      "Blue",
+      "Blush"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "52148",
+    "itemName": "Cocktail Hour Martini",
+    "artist": "Jill,Susan",
+    "orientation": "Square",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "52148.tif",
+    "groups": [
+      "52147"
+    ],
+    "categories": [
+      "Still Life",
+      "Decorative",
+      "Food",
+      "Cuisine",
+      "Alcohol",
+      "Vintage",
+      "Sophisticated",
+      "Kitchen",
+      "Den",
+      "Self Matted",
+      "Drinks",
+      "Bordered Effect",
+      "Stripes"
+    ],
+    "colors": [
+      "Black",
+      "Yellow",
+      "Green",
+      "Pink",
+      "Blue",
+      "Blush"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "52172",
+    "itemName": "Beautiful Dreamer I",
+    "artist": "CAD Designs",
+    "orientation": "Square",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "52172.tif",
+    "groups": [
+      "52173"
+    ],
+    "categories": [
+      "Botanical",
+      "Floral",
+      "Illustrative",
+      "Figurative",
+      "Ethnic",
+      "Watercolor",
+      "Peonies",
+      "Portrait",
+      "Woman",
+      "Feminine",
+      "Fashion"
+    ],
+    "colors": [
+      "Brown",
+      "Yellow",
+      "Orange",
+      "Pink",
+      "Purple",
+      "Blue",
+      "Blush"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "52173",
+    "itemName": "Beautiful Dreamer II",
+    "artist": "CAD Designs",
+    "orientation": "Square",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "52173.tif",
+    "groups": [
+      "52172"
+    ],
+    "categories": [
+      "Botanical",
+      "Floral",
+      "Illustrative",
+      "Figurative",
+      "Ethnic",
+      "Watercolor",
+      "Peonies",
+      "Portrait",
+      "Woman",
+      "Feminine",
+      "Fashion"
+    ],
+    "colors": [
+      "Brown",
+      "Yellow",
+      "Orange",
+      "Pink",
+      "Purple",
+      "Blue",
+      "Blush"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  },
+  {
+    "sku": "52205",
+    "itemName": "White Sand Summer",
+    "artist": "SSP LLC",
+    "orientation": "Horizontal",
+    "publishedStockSize": "",
+    "stockSizeCode": "",
+    "fileName": "52205.tif",
+    "groups": [],
+    "categories": [
+      "Nature",
+      "Coastal",
+      "Landscape",
+      "Travel",
+      "Photography",
+      "Ocean",
+      "Beach",
+      "Sky",
+      "Sand",
+      "Coastal"
+    ],
+    "colors": [
+      "Gray",
+      "Tan",
+      "White",
+      "Turquoise",
+      "Blue",
+      "Brown"
+    ],
+    "importedAt": "2026-05-20T03:58:58.102Z"
+  }
+]
