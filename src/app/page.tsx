@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Building2, ImageIcon, Store } from "lucide-react";
 import Image from "next/image";
 import { PageShell } from "@/components/page-shell";
 import { getSiteContent } from "@/lib/content";
@@ -53,6 +53,32 @@ export default function Home() {
               />
             </div>
           </div>
+        </section>
+
+        <section className="grid gap-5 md:grid-cols-3">
+          <article className="feature-tile rounded-2xl p-6">
+            <Store className="text-primary" size={24} />
+            <h2 className="mt-4 text-2xl font-bold">Retail Programs</h2>
+            <p className="mt-3 text-sm leading-relaxed text-text-muted">
+              Galaxy Graphics licenses print-ready artwork for major retail and consumer product programs.
+            </p>
+          </article>
+
+          <article className="feature-tile rounded-2xl p-6">
+            <ImageIcon className="text-primary" size={24} />
+            <h2 className="mt-4 text-2xl font-bold">Large Image Library</h2>
+            <p className="mt-3 text-sm leading-relaxed text-text-muted">
+              Buyers can search a broad catalog by artist, style, color, orientation, and subject matter.
+            </p>
+          </article>
+
+          <article className="feature-tile rounded-2xl p-6">
+            <Building2 className="text-primary" size={24} />
+            <h2 className="mt-4 text-2xl font-bold">Licensing Support</h2>
+            <p className="mt-3 text-sm leading-relaxed text-text-muted">
+              The collection supports manufacturers, hospitality groups, and brands sourcing art for products and spaces.
+            </p>
+          </article>
         </section>
       </main>
     </PageShell>
