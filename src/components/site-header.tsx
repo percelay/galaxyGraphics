@@ -5,10 +5,11 @@ type SiteHeaderProps = {
 };
 
 const navItems = [
-  { label: "Hero", href: "#hero" },
-  { label: "About/Licensing", href: "#about" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Contact", href: "#contact" }
+  { label: "Home", href: "/" },
+  { label: "About/Licensing", href: "/about" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Contact", href: "/contact" },
+  { label: "Admin", href: "/admin" }
 ];
 
 export function SiteHeader({ brand }: SiteHeaderProps) {
@@ -17,7 +18,7 @@ export function SiteHeader({ brand }: SiteHeaderProps) {
       <div className="mx-auto w-full max-w-6xl">
         <div className="site-nav-shell flex flex-col gap-3 rounded-2xl px-4 py-3 sm:px-6 sm:py-4 md:flex-row md:items-center md:justify-between md:gap-8">
           <a
-            href="#hero"
+            href="/"
             className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-text-main"
           >
             <Sparkles size={16} className="text-primary" />
