@@ -3,6 +3,15 @@ import Image from "next/image";
 import { PageShell } from "@/components/page-shell";
 import { getSiteContent } from "@/lib/content";
 
+const trustedRetailers = [
+  { name: "Target", logo: "/trusted/target.png" },
+  { name: "Walmart", logo: "/trusted/walmart.png" },
+  { name: "CVS", logo: "/trusted/cvs.png" },
+  { name: "Big Lots", logo: "/trusted/big-lots.png" },
+  { name: "Dollar Tree", logo: "/trusted/dollar-tree.png" },
+  { name: "Dollar General", logo: "/trusted/dollar-general.png" },
+];
+
 export default function Home() {
   const content = getSiteContent();
 
@@ -51,6 +60,42 @@ export default function Home() {
                 priority
                 className="h-full min-h-[340px] w-full object-cover object-center"
               />
+            </div>
+          </div>
+        </section>
+
+        <section
+          aria-labelledby="trusted-retailers"
+          className="paper-panel rounded-2xl p-5 sm:p-7"
+        >
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-xl">
+              <p className="eyebrow" id="trusted-retailers">
+                Trusted By
+              </p>
+              <h2 className="mt-3 text-2xl font-bold sm:text-3xl">
+                Retail artwork programs for national shelves.
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-text-muted sm:text-base">
+                Galaxy Graphics artwork has supported print collections for major retailers including Target, Walmart, CVS, Big Lots, Dollar Tree, and Dollar General.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:w-[34rem]">
+              {trustedRetailers.map((retailer) => (
+                <div
+                  className="flex h-24 items-center justify-center rounded-xl border border-line bg-white px-5 shadow-[0_10px_24px_rgb(20_70_118_/_0.06)]"
+                  key={retailer.name}
+                >
+                  <Image
+                    src={retailer.logo}
+                    alt={`${retailer.name} logo`}
+                    width={180}
+                    height={80}
+                    className="max-h-14 w-full object-contain"
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </section>
