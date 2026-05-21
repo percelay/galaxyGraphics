@@ -66,7 +66,7 @@ export default function Home() {
 
         <section
           aria-labelledby="trusted-retailers"
-          className="paper-panel rounded-2xl px-6 py-10 text-center sm:px-10 sm:py-12"
+          className="px-2 py-4 text-center sm:px-6 sm:py-6"
         >
           <h2
             className="mx-auto max-w-xl text-2xl font-extrabold uppercase leading-tight tracking-normal text-text-main sm:text-3xl"
@@ -75,7 +75,7 @@ export default function Home() {
             Trusted by our national clients
           </h2>
 
-          <div className="mx-auto mt-9 flex max-w-4xl flex-wrap items-center justify-center gap-x-10 gap-y-7 sm:gap-x-12">
+          <div className="mx-auto mt-8 flex max-w-4xl flex-wrap items-center justify-center gap-x-10 gap-y-7 sm:gap-x-12">
             {trustedRetailers.map((retailer) => (
               <div
                 className="flex h-14 w-32 items-center justify-center sm:w-36"
