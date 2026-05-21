@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, FileDown, Loader2, Plus, Search } from "lucide-react";
+import { Check, FileDown, Loader2, Plus, Search, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import type { CatalogItem, CatalogSearchResult } from "@/lib/catalog";
 import { exportCatalogSelectionPdf } from "@/lib/pdf-export";
@@ -64,6 +64,16 @@ const itemDetail = (item: CatalogItem): string =>
     .filter(Boolean)
     .join(" • ");
 
+const catalogDetailRows = (item: CatalogItem): { label: string; value: string }[] =>
+  [
+    { label: "SKU", value: item.sku },
+    { label: "Artist", value: item.artist },
+    { label: "Size", value: item.publishedStockSize || item.stockSizeCode },
+    { label: "Orientation", value: item.orientation },
+    { label: "Colors", value: item.colors.slice(0, 4).join(", ") },
+    { label: "Categories", value: item.categories.slice(0, 6).join(", ") }
+  ].filter((row) => row.value);
+
 export function CatalogSearchSection({
   initialResult,
   brandName
@@ -85,6 +95,7 @@ export function CatalogSearchSection({
     () => new Set(selectedItems.map((item) => item.sku)),
     [selectedItems]
   );
+  const isPreviewSelected = previewItem ? selectedSkus.has(previewItem.sku) : false;
 
   useEffect(() => {
     const controller = new AbortController();
@@ -113,6 +124,21 @@ export function CatalogSearchSection({
       window.clearTimeout(timeout);
     };
   }, [artist, color, offset, orientation, query]);
+
+  useEffect(() => {
+    if (!previewItem) {
+      return;
+    }
+
+    const closeOnEscape = (event: KeyboardEvent): void => {
+      if (event.key === "Escape") {
+        setPreviewItem(null);
+      }
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [previewItem]);
 
   const resetOffset = (next: () => void): void => {
     setOffset(0);
@@ -290,36 +316,86 @@ export function CatalogSearchSection({
 
         {previewItem ? (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+            className="fixed inset-x-0 bottom-0 top-36 z-40 flex items-start justify-center overflow-y-auto bg-black/60 p-4 md:top-28"
             role="dialog"
             aria-modal="true"
+            aria-labelledby="catalog-preview-title"
             onClick={() => setPreviewItem(null)}
           >
             <div
-              className="max-h-[90vh] w-full max-w-4xl overflow-auto rounded-2xl bg-surface p-4 shadow-2xl"
+              className="w-full max-w-5xl overflow-hidden rounded-2xl bg-surface shadow-2xl"
               onClick={(event) => event.stopPropagation()}
             >
-              <img
-                src={
-                  previewItem.largeImage ||
-                  previewItem.thumbnailImage ||
-                  fallbackImages[0]
-                }
-                alt={previewItem.itemName || previewItem.sku}
-                className="max-h-[72vh] w-full object-contain"
-              />
-              <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <h3 className="text-2xl">{previewItem.itemName || "Untitled"}</h3>
-                  <p className="text-sm text-text-muted">{itemDetail(previewItem)}</p>
+              <div className="grid max-h-[calc(100vh-10rem)] overflow-y-auto lg:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.75fr)]">
+                <div className="flex min-h-[20rem] items-center justify-center bg-[#f8fcff] p-4 sm:p-6">
+                  <img
+                    src={
+                      previewItem.largeImage ||
+                      previewItem.thumbnailImage ||
+                      fallbackImages[0]
+                    }
+                    alt={previewItem.itemName || previewItem.sku}
+                    className="max-h-[58vh] w-full object-contain"
+                  />
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setPreviewItem(null)}
-                  className="btn-secondary-watercolor px-4 py-2 text-sm font-semibold"
-                >
-                  Close
-                </button>
+
+                <div className="flex flex-col p-5 sm:p-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="eyebrow">Image Details</p>
+                      <h3
+                        className="mt-2 text-3xl font-bold leading-tight"
+                        id="catalog-preview-title"
+                      >
+                        {previewItem.itemName || "Untitled"}
+                      </h3>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setPreviewItem(null)}
+                      className="btn-secondary-watercolor inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
+                      aria-label="Close preview"
+                    >
+                      <X size={18} />
+                    </button>
+                  </div>
+
+                  <dl className="mt-5 grid gap-2.5">
+                    {catalogDetailRows(previewItem).map((row) => (
+                      <div
+                        className="rounded-xl border border-line bg-[#f8fcff] px-4 py-2.5"
+                        key={row.label}
+                      >
+                        <dt className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-primary">
+                          {row.label}
+                        </dt>
+                        <dd className="mt-1 text-sm font-semibold leading-relaxed text-text-main">
+                          {row.value}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+
+                  <div className="sticky bottom-0 -mx-5 mt-5 flex flex-col gap-3 border-t border-line bg-surface p-5 sm:-mx-6 sm:flex-row sm:px-6">
+                    <button
+                      type="button"
+                      onClick={() => toggleSelectedItem(previewItem)}
+                      className={`inline-flex flex-1 items-center justify-center gap-2 px-4 py-3 text-sm font-semibold ${
+                        isPreviewSelected ? "btn-primary-watercolor" : "btn-secondary-watercolor"
+                      }`}
+                    >
+                      {isPreviewSelected ? <Check size={16} /> : <Plus size={16} />}
+                      {isPreviewSelected ? "Added to Gallery" : "Add to Gallery"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setPreviewItem(null)}
+                      className="btn-secondary-watercolor px-4 py-3 text-sm font-semibold"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
