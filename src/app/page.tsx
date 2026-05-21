@@ -66,37 +66,30 @@ export default function Home() {
 
         <section
           aria-labelledby="trusted-retailers"
-          className="paper-panel rounded-2xl p-5 sm:p-7"
+          className="paper-panel rounded-2xl px-6 py-10 text-center sm:px-10 sm:py-12"
         >
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-xl">
-              <p className="eyebrow" id="trusted-retailers">
-                Trusted By
-              </p>
-              <h2 className="mt-3 text-2xl font-bold sm:text-3xl">
-                Retail artwork programs for national shelves.
-              </h2>
-              <p className="mt-3 text-sm leading-relaxed text-text-muted sm:text-base">
-                Galaxy Graphics artwork has supported print collections for major retailers including Target, Walmart, CVS, Big Lots, Dollar Tree, and Dollar General.
-              </p>
-            </div>
+          <h2
+            className="mx-auto max-w-xl text-2xl font-extrabold uppercase leading-tight tracking-normal text-text-main sm:text-3xl"
+            id="trusted-retailers"
+          >
+            Trusted by our national clients
+          </h2>
 
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:w-[34rem]">
-              {trustedRetailers.map((retailer) => (
-                <div
-                  className="flex h-24 items-center justify-center rounded-xl border border-line bg-white px-5 shadow-[0_10px_24px_rgb(20_70_118_/_0.06)]"
-                  key={retailer.name}
-                >
-                  <Image
-                    src={retailer.logo}
-                    alt={`${retailer.name} logo`}
-                    width={180}
-                    height={80}
-                    className="max-h-14 w-full object-contain"
-                  />
-                </div>
-              ))}
-            </div>
+          <div className="mx-auto mt-9 flex max-w-4xl flex-wrap items-center justify-center gap-x-10 gap-y-7 sm:gap-x-12">
+            {trustedRetailers.map((retailer) => (
+              <div
+                className="flex h-14 w-32 items-center justify-center sm:w-36"
+                key={retailer.name}
+              >
+                <Image
+                  src={retailer.logo}
+                  alt={`${retailer.name} logo`}
+                  width={180}
+                  height={80}
+                  className="max-h-12 w-full object-contain"
+                />
+              </div>
+            ))}
           </div>
         </section>
 
