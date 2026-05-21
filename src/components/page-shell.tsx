@@ -11,9 +11,9 @@ export function PageShell({ children }: PageShellProps) {
   const content = getSiteContent();
 
   return (
-    <div className="watercolor-shell min-h-screen text-text-main">
+    <div className="watercolor-shell flex min-h-screen flex-col text-text-main">
       <SiteHeader brand={content.name} />
-      {children}
+      <div className="flex-1">{children}</div>
       <SiteFooter brand={content.name} contactEmail={content.contactEmail} />
     </div>
   );

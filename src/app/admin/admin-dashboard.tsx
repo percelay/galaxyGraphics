@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader2, UploadCloud } from "lucide-react";
+import { ArrowLeft, Loader2, UploadCloud } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import type { CatalogItem } from "@/lib/catalog";
 import { CatalogManager } from "./catalog-manager";
@@ -75,7 +75,16 @@ export function AdminDashboard() {
         <div className="paper-panel rounded-2xl p-6 sm:p-9">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <p className="eyebrow">Admin</p>
+              <div className="flex flex-wrap items-center gap-3">
+                <p className="eyebrow">Admin</p>
+                <a
+                  href="/"
+                  className="btn-secondary-watercolor inline-flex items-center gap-2 px-3 py-2 text-xs font-semibold"
+                >
+                  <ArrowLeft size={14} />
+                  Back to site
+                </a>
+              </div>
               <h1 className="section-title mt-3">Catalog Upload</h1>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-text-muted sm:text-base">
                 Upload the master CSV here. New SKUs are added, existing SKUs are skipped, and blank fields stay blank.
