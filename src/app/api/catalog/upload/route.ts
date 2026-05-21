@@ -15,18 +15,30 @@ const decodeCsvFile = async (file: File): Promise<string> => {
 };
 
 export async function POST(request: Request) {
-  const formData = await request.formData();
-  const file = formData.get("file");
+  try {
+    const formData = await request.formData();
+    const file = formData.get("file");
 
-  if (!(file instanceof File)) {
+    if (!(file instanceof File)) {
+      return NextResponse.json(
+        { error: "Upload a CSV file using the file field." },
+        { status: 400 }
+      );
+    }
+
+    const csv = await decodeCsvFile(file);
+    const result = await importCatalogCsv(csv);
+
+    return NextResponse.json(result);
+  } catch (error) {
     return NextResponse.json(
-      { error: "Upload a CSV file using the file field." },
-      { status: 400 }
+      {
+        error:
+          error instanceof Error
+            ? error.message
+            : "CSV upload failed. Please try again."
+      },
+      { status: 500 }
     );
   }
-
-  const csv = await decodeCsvFile(file);
-  const result = await importCatalogCsv(csv);
-
-  return NextResponse.json(result);
 }
