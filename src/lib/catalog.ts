@@ -1,6 +1,18 @@
 import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { cache } from "react";
+import {
+  addCatalogItemToDb,
+  deleteCatalogItemFromDb,
+  getCatalogItemCountFromDb,
+  getCatalogItemFromDb,
+  getCatalogItemsFromDb,
+  hasCatalogDatabase,
+  importCatalogItemsToDb,
+  searchCatalogItemsInDb,
+  updateCatalogImagesInDb,
+  updateCatalogItemInDb
+} from "@/lib/catalog-db";
 
 export type CatalogItem = {
   sku: string;
@@ -224,7 +236,7 @@ const mapCsvRowsToCatalogItems = (csv: string, importedAt: string): CatalogItem[
     .filter((item): item is CatalogItem => item !== null);
 };
 
-const readCatalogItemsUncached = async (): Promise<CatalogItem[]> => {
+const readFileCatalogItems = async (): Promise<CatalogItem[]> => {
   try {
     const file = await readFile(CATALOG_PATH, "utf8");
     const parsed = JSON.parse(file) as unknown;
@@ -232,6 +244,14 @@ const readCatalogItemsUncached = async (): Promise<CatalogItem[]> => {
   } catch {
     return [];
   }
+};
+
+const readCatalogItemsUncached = async (): Promise<CatalogItem[]> => {
+  if (hasCatalogDatabase()) {
+    return getCatalogItemsFromDb();
+  }
+
+  return readFileCatalogItems();
 };
 
 const writeCatalogItems = async (items: CatalogItem[]): Promise<void> => {
@@ -251,7 +271,18 @@ export const searchCatalogItems = async ({
   limit = 60,
   offset = 0
 }: CatalogSearchParams = {}): Promise<CatalogSearchResult> => {
-  const items = await readCatalogItemsUncached();
+  if (hasCatalogDatabase()) {
+    return searchCatalogItemsInDb({
+      query,
+      artist,
+      color,
+      orientation,
+      limit,
+      offset
+    });
+  }
+
+  const items = await readFileCatalogItems();
   const normalizedQuery = query.trim().toLowerCase();
   const normalizedArtist = artist.trim();
   const normalizedColor = color.trim();
@@ -313,7 +344,21 @@ export const importCatalogCsv = async (
 ): Promise<CatalogUploadResult> => {
   const importedAt = new Date().toISOString();
   const incomingItems = mapCsvRowsToCatalogItems(csv, importedAt);
-  const existingItems = await readCatalogItemsUncached();
+
+  if (hasCatalogDatabase()) {
+    const insertedItems = await importCatalogItemsToDb(incomingItems);
+    const totalCatalogItems = await getCatalogItemCountFromDb();
+
+    return {
+      inserted: insertedItems.length,
+      skipped: incomingItems.length - insertedItems.length,
+      totalRows: incomingItems.length,
+      totalCatalogItems,
+      sampleItems: insertedItems.slice(0, 5)
+    };
+  }
+
+  const existingItems = await readFileCatalogItems();
   const existingSkus = new Set(existingItems.map((item) => item.sku));
   const batchSkus = new Set<string>();
   const newItems: CatalogItem[] = [];
@@ -350,7 +395,11 @@ export const addCatalogItem = async (
     throw new Error("SKU is required.");
   }
 
-  const items = await readCatalogItemsUncached();
+  if (hasCatalogDatabase()) {
+    return addCatalogItemToDb(item);
+  }
+
+  const items = await readFileCatalogItems();
 
   if (items.some((existingItem) => existingItem.sku === item.sku)) {
     throw new Error("A record with this SKU already exists.");
@@ -365,7 +414,28 @@ export const updateCatalogItem = async (
   input: Partial<CatalogItemInput>
 ): Promise<CatalogItem | null> => {
   const normalizedSku = normalizeValue(sku);
-  const items = await readCatalogItemsUncached();
+
+  if (hasCatalogDatabase()) {
+    const existingItem = await getCatalogItemFromDb(normalizedSku);
+
+    if (!existingItem) {
+      return null;
+    }
+
+    const updatedItem = normalizeCatalogItemInput(
+      {
+        ...existingItem,
+        ...input,
+        sku: normalizedSku,
+        importedAt: existingItem.importedAt
+      },
+      existingItem.importedAt
+    );
+
+    return updateCatalogItemInDb(normalizedSku, updatedItem);
+  }
+
+  const items = await readFileCatalogItems();
   const existingIndex = items.findIndex((item) => item.sku === normalizedSku);
 
   if (existingIndex === -1) {
@@ -382,6 +452,11 @@ export const updateCatalogItem = async (
     },
     existingItem.importedAt
   );
+
+  if (hasCatalogDatabase()) {
+    return updateCatalogItemInDb(normalizedSku, updatedItem);
+  }
+
   const nextItems = [...items];
   nextItems[existingIndex] = updatedItem;
   await writeCatalogItems(nextItems);
@@ -391,7 +466,12 @@ export const updateCatalogItem = async (
 
 export const deleteCatalogItem = async (sku: string): Promise<boolean> => {
   const normalizedSku = normalizeValue(sku);
-  const items = await readCatalogItemsUncached();
+
+  if (hasCatalogDatabase()) {
+    return deleteCatalogItemFromDb(normalizedSku);
+  }
+
+  const items = await readFileCatalogItems();
   const nextItems = items.filter((item) => item.sku !== normalizedSku);
 
   if (nextItems.length === items.length) {
@@ -413,7 +493,9 @@ export const attachCatalogImages = async (
   unmatched: string[];
   totalCatalogItems: number;
 }> => {
-  const items = await readCatalogItemsUncached();
+  const items = hasCatalogDatabase()
+    ? await getCatalogItemsFromDb()
+    : await readFileCatalogItems();
   const itemByKey = new Map<string, number>();
 
   items.forEach((item, index) => {
@@ -443,7 +525,16 @@ export const attachCatalogImages = async (
     };
   });
 
-  await writeCatalogItems(nextItems);
+  if (hasCatalogDatabase()) {
+    const updates = [...matchedIndexes].map((index) => ({
+      sku: nextItems[index].sku,
+      thumbnailImage: nextItems[index].thumbnailImage,
+      largeImage: nextItems[index].largeImage
+    }));
+    await updateCatalogImagesInDb(updates);
+  } else {
+    await writeCatalogItems(nextItems);
+  }
 
   return {
     matched: matchedIndexes.size,

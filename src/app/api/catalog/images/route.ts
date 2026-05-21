@@ -2,6 +2,11 @@ import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { NextResponse } from "next/server";
 import { attachCatalogImages, imageMatchKey } from "@/lib/catalog";
+import {
+  hasR2Storage,
+  uploadCatalogImageToR2,
+  type CatalogImageKind
+} from "@/lib/r2-storage";
 
 export const dynamic = "force-dynamic";
 
@@ -32,8 +37,10 @@ export async function POST(request: Request) {
   >();
   let stored = 0;
 
-  await mkdir(path.join(PUBLIC_IMAGE_DIR, "thumbs"), { recursive: true });
-  await mkdir(path.join(PUBLIC_IMAGE_DIR, "large"), { recursive: true });
+  if (!hasR2Storage()) {
+    await mkdir(path.join(PUBLIC_IMAGE_DIR, "thumbs"), { recursive: true });
+    await mkdir(path.join(PUBLIC_IMAGE_DIR, "large"), { recursive: true });
+  }
 
   for (const [index, file] of files.entries()) {
     const sourcePath = relativePaths[index] || file.name;
@@ -43,7 +50,7 @@ export async function POST(request: Request) {
     }
 
     const matchKey = imageMatchKey(file.name);
-    const sizeFolder = isThumbnailPath(sourcePath)
+    const sizeFolder: CatalogImageKind | "" = isThumbnailPath(sourcePath)
       ? "thumbs"
       : isLargePath(sourcePath)
         ? "large"
@@ -54,12 +61,23 @@ export async function POST(request: Request) {
     }
 
     const fileName = safeFileName(file.name);
-    const destination = path.join(PUBLIC_IMAGE_DIR, sizeFolder, fileName);
     const bytes = new Uint8Array(await file.arrayBuffer());
-    await writeFile(destination, bytes);
+    let publicPath = "";
+
+    if (hasR2Storage()) {
+      publicPath = await uploadCatalogImageToR2({
+        kind: sizeFolder,
+        key: fileName,
+        bytes,
+        contentType: file.type || "image/jpeg"
+      });
+    } else {
+      const destination = path.join(PUBLIC_IMAGE_DIR, sizeFolder, fileName);
+      await writeFile(destination, bytes);
+      publicPath = `${PUBLIC_IMAGE_PATH}/${sizeFolder}/${fileName}`;
+    }
 
     const existing = imageMap.get(matchKey) ?? { matchKey };
-    const publicPath = `${PUBLIC_IMAGE_PATH}/${sizeFolder}/${fileName}`;
 
     if (sizeFolder === "thumbs") {
       existing.thumbnailImage = publicPath;
