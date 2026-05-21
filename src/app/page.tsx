@@ -25,13 +25,13 @@ export default function Home() {
           <div className="grid items-center gap-9 lg:grid-cols-[1.06fr_1fr] lg:gap-12">
             <div className="space-y-6">
               <p className="eyebrow">
-                {content.tagline}
+                Our mission
               </p>
               <h1 className="hero-title">
-                {content.hero.headline}
+                Scalable art for modern businesses
               </h1>
               <p className="hero-copy">
-                {content.hero.subheadline}
+                We enable artistic design with production-ready visual systems for physical prints, materials, spaces, and digital products.
               </p>
 
               <div className="flex flex-wrap gap-3 pt-2">
@@ -64,6 +64,32 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="grid gap-5 md:grid-cols-3">
+          <article className="feature-tile rounded-2xl p-6">
+            <Store className="text-primary" size={24} />
+            <h2 className="mt-4 text-2xl font-bold">Retail Programs</h2>
+            <p className="mt-3 text-sm leading-relaxed text-text-muted">
+              Galaxy Graphics licenses print-ready artwork for major retail and consumer product programs.
+            </p>
+          </article>
+
+          <article className="feature-tile rounded-2xl p-6">
+            <ImageIcon className="text-primary" size={24} />
+            <h2 className="mt-4 text-2xl font-bold">Large Image Library</h2>
+            <p className="mt-3 text-sm leading-relaxed text-text-muted">
+              Buyers can search a broad catalog by artist, style, color, orientation, and subject matter.
+            </p>
+          </article>
+
+          <article className="feature-tile rounded-2xl p-6">
+            <Building2 className="text-primary" size={24} />
+            <h2 className="mt-4 text-2xl font-bold">Licensing Support</h2>
+            <p className="mt-3 text-sm leading-relaxed text-text-muted">
+              The collection supports manufacturers, hospitality groups, and brands sourcing art for products and spaces.
+            </p>
+          </article>
+        </section>
+
         <section
           aria-labelledby="trusted-retailers"
           className="px-2 py-4 text-center sm:px-6 sm:py-6"
@@ -91,32 +117,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </section>
-
-        <section className="grid gap-5 md:grid-cols-3">
-          <article className="feature-tile rounded-2xl p-6">
-            <Store className="text-primary" size={24} />
-            <h2 className="mt-4 text-2xl font-bold">Retail Programs</h2>
-            <p className="mt-3 text-sm leading-relaxed text-text-muted">
-              Galaxy Graphics licenses print-ready artwork for major retail and consumer product programs.
-            </p>
-          </article>
-
-          <article className="feature-tile rounded-2xl p-6">
-            <ImageIcon className="text-primary" size={24} />
-            <h2 className="mt-4 text-2xl font-bold">Large Image Library</h2>
-            <p className="mt-3 text-sm leading-relaxed text-text-muted">
-              Buyers can search a broad catalog by artist, style, color, orientation, and subject matter.
-            </p>
-          </article>
-
-          <article className="feature-tile rounded-2xl p-6">
-            <Building2 className="text-primary" size={24} />
-            <h2 className="mt-4 text-2xl font-bold">Licensing Support</h2>
-            <p className="mt-3 text-sm leading-relaxed text-text-muted">
-              The collection supports manufacturers, hospitality groups, and brands sourcing art for products and spaces.
-            </p>
-          </article>
         </section>
       </main>
     </PageShell>
