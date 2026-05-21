@@ -30,6 +30,13 @@ R2_BUCKET_LARGE=galaxy-large
 
 ## 3. Deploy
 
+Add these admin protection variables in Vercel too:
+
+```text
+ADMIN_USERNAME
+ADMIN_PASSWORD
+```
+
 Redeploy the site after adding the environment variables.
 
 ## 4. Seed Data

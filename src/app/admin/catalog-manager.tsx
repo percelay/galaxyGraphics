@@ -6,6 +6,7 @@ import type { CatalogItem, CatalogItemInput } from "@/lib/catalog";
 
 type CatalogManagerProps = {
   initialItems: CatalogItem[];
+  onCatalogChange?: () => void | Promise<void>;
 };
 
 type FormState = Omit<CatalogItemInput, "groups" | "categories" | "colors"> & {
@@ -72,7 +73,10 @@ const formToPayload = (form: FormState): CatalogItemInput => ({
   importedAt: form.importedAt
 });
 
-export function CatalogManager({ initialItems }: CatalogManagerProps) {
+export function CatalogManager({
+  initialItems,
+  onCatalogChange
+}: CatalogManagerProps) {
   const [items, setItems] = useState<CatalogItem[]>(initialItems);
   const [query, setQuery] = useState("");
   const [editingSku, setEditingSku] = useState<string | null>(null);
@@ -165,6 +169,7 @@ export function CatalogManager({ initialItems }: CatalogManagerProps) {
       setEditingSku(data.item.sku);
       setForm(itemToForm(data.item));
       setMessage(editingSku ? "Record updated." : "Record added.");
+      await onCatalogChange?.();
     } catch (caughtError) {
       setError(
         caughtError instanceof Error
@@ -207,6 +212,7 @@ export function CatalogManager({ initialItems }: CatalogManagerProps) {
         startNewRecord();
       }
       setMessage("Record deleted.");
+      await onCatalogChange?.();
     } catch (caughtError) {
       setError(
         caughtError instanceof Error

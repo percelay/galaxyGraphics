@@ -4,7 +4,13 @@ import { CheckCircle2, Loader2, UploadCloud } from "lucide-react";
 import { useState } from "react";
 import type { CatalogUploadResult } from "@/lib/catalog";
 
-export function CatalogUploadForm() {
+type CatalogUploadFormProps = {
+  onImportComplete?: () => void | Promise<void>;
+};
+
+export function CatalogUploadForm({
+  onImportComplete
+}: CatalogUploadFormProps) {
   const [file, setFile] = useState<File | null>(null);
   const [result, setResult] = useState<CatalogUploadResult | null>(null);
   const [error, setError] = useState("");
@@ -50,6 +56,7 @@ export function CatalogUploadForm() {
       }
 
       setResult(payload);
+      await onImportComplete?.();
     } catch (caughtError) {
       setError(
         caughtError instanceof Error

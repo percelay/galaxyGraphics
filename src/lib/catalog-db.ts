@@ -1,4 +1,4 @@
-import { Pool, type QueryResultRow } from "pg";
+import type { Pool, QueryResultRow } from "pg";
 import type {
   CatalogItem,
   CatalogItemInput,
@@ -10,19 +10,24 @@ const databaseUrl = process.env.DATABASE_URL;
 
 const globalForPg = globalThis as unknown as {
   galaxyCatalogPool?: Pool;
+  galaxyCatalogPoolPromise?: Promise<Pool>;
 };
 
-const getPool = (): Pool | null => {
+const getPool = async (): Promise<Pool | null> => {
   if (!databaseUrl) {
     return null;
   }
 
   if (!globalForPg.galaxyCatalogPool) {
-    globalForPg.galaxyCatalogPool = new Pool({
-      connectionString: databaseUrl,
-      max: 5,
-      idleTimeoutMillis: 30_000
-    });
+    globalForPg.galaxyCatalogPoolPromise ??= import("pg").then(
+      ({ Pool }) =>
+        new Pool({
+          connectionString: databaseUrl,
+          max: 5,
+          idleTimeoutMillis: 30_000
+        })
+    );
+    globalForPg.galaxyCatalogPool = await globalForPg.galaxyCatalogPoolPromise;
   }
 
   return globalForPg.galaxyCatalogPool;
@@ -111,7 +116,7 @@ const catalogColumns = `
 `;
 
 export const getCatalogItemsFromDb = async (): Promise<CatalogItem[]> => {
-  const pool = getPool();
+  const pool = await getPool();
   if (!pool) {
     return [];
   }
@@ -125,7 +130,7 @@ export const getCatalogItemsFromDb = async (): Promise<CatalogItem[]> => {
 export const getCatalogItemFromDb = async (
   sku: string
 ): Promise<CatalogItem | null> => {
-  const pool = getPool();
+  const pool = await getPool();
   if (!pool) {
     return null;
   }
@@ -139,7 +144,7 @@ export const getCatalogItemFromDb = async (
 };
 
 export const getCatalogItemCountFromDb = async (): Promise<number> => {
-  const pool = getPool();
+  const pool = await getPool();
   if (!pool) {
     return 0;
   }
@@ -154,7 +159,7 @@ export const getCatalogItemCountFromDb = async (): Promise<number> => {
 export const importCatalogItemsToDb = async (
   incomingItems: CatalogItem[]
 ): Promise<CatalogItem[]> => {
-  const pool = getPool();
+  const pool = await getPool();
   if (!pool || incomingItems.length === 0) {
     return [];
   }
@@ -190,7 +195,7 @@ export const importCatalogItemsToDb = async (
 export const addCatalogItemToDb = async (
   item: CatalogItem
 ): Promise<CatalogItem> => {
-  const pool = getPool();
+  const pool = await getPool();
   if (!pool) {
     throw new Error("Database is not configured.");
   }
@@ -211,7 +216,7 @@ export const updateCatalogItemInDb = async (
   sku: string,
   item: CatalogItem
 ): Promise<CatalogItem | null> => {
-  const pool = getPool();
+  const pool = await getPool();
   if (!pool) {
     return null;
   }
@@ -254,7 +259,7 @@ export const updateCatalogItemInDb = async (
 };
 
 export const deleteCatalogItemFromDb = async (sku: string): Promise<boolean> => {
-  const pool = getPool();
+  const pool = await getPool();
   if (!pool) {
     return false;
   }
@@ -272,7 +277,7 @@ export const updateCatalogImagesInDb = async (
     largeImage?: string;
   }[]
 ): Promise<void> => {
-  const pool = getPool();
+  const pool = await getPool();
   if (!pool || updates.length === 0) {
     return;
   }
@@ -309,7 +314,7 @@ export const searchCatalogItemsInDb = async ({
   limit = 60,
   offset = 0
 }: CatalogSearchParams = {}): Promise<CatalogSearchResult> => {
-  const pool = getPool();
+  const pool = await getPool();
   if (!pool) {
     return {
       items: [],

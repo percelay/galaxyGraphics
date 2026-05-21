@@ -19,7 +19,11 @@ type DirectoryFile = File & {
   webkitRelativePath?: string;
 };
 
-export function ImageUploadForm() {
+type ImageUploadFormProps = {
+  onUploadComplete?: () => void | Promise<void>;
+};
+
+export function ImageUploadForm({ onUploadComplete }: ImageUploadFormProps) {
   const [files, setFiles] = useState<DirectoryFile[]>([]);
   const [result, setResult] = useState<ImageUploadResult | null>(null);
   const [error, setError] = useState("");
@@ -54,6 +58,7 @@ export function ImageUploadForm() {
       }
 
       setResult(payload);
+      await onUploadComplete?.();
     } catch (caughtError) {
       setError(
         caughtError instanceof Error
